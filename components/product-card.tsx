@@ -16,8 +16,8 @@ export function ProductCard({
       href={product.url}
       target="_blank"
       rel="noopener noreferrer"
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y: 20, scale: 0.98 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
       viewport={{ once: true, margin: "-40px" }}
       transition={{
         duration: 0.6,
@@ -30,15 +30,6 @@ export function ProductCard({
       {/* Shimmer sweep on hover */}
       <motion.div
         className="pointer-events-none absolute inset-0 shimmer opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-      />
-
-      {/* Animated top border accent */}
-      <motion.div
-        className="absolute top-0 left-0 h-px bg-foreground"
-        initial={{ width: "0%" }}
-        whileInView={{ width: "100%" }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.4 + index * 0.1, duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
       />
 
       <div className="relative flex items-start justify-between gap-6">
