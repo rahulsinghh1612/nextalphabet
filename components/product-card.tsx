@@ -19,15 +19,26 @@ export function ProductCard({
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 0.6, ease: [0.25, 0.4, 0.25, 1], delay: index * 0.1 }}
-      whileHover={{ y: -4, transition: { duration: 0.2 } }}
+      transition={{
+        duration: 0.6,
+        ease: [0.25, 0.4, 0.25, 1],
+        delay: index * 0.1,
+      }}
+      whileHover={{ y: -4, transition: { duration: 0.25 } }}
       className="group relative block overflow-hidden rounded-2xl border border-border bg-white p-6 shadow-sm transition-shadow duration-300 hover:shadow-md md:p-8"
     >
-      {/* Subtle hover gradient overlay */}
+      {/* Shimmer sweep on hover */}
       <motion.div
-        className="pointer-events-none absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-muted/20 opacity-0"
-        whileHover={{ opacity: 1 }}
-        transition={{ duration: 0.3 }}
+        className="pointer-events-none absolute inset-0 shimmer opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+      />
+
+      {/* Animated top border accent */}
+      <motion.div
+        className="absolute top-0 left-0 h-px bg-foreground"
+        initial={{ width: "0%" }}
+        whileInView={{ width: "100%" }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.4 + index * 0.1, duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
       />
 
       <div className="relative flex items-start justify-between gap-6">
@@ -36,45 +47,68 @@ export function ProductCard({
             <h3 className="text-lg font-semibold text-foreground md:text-xl">
               {product.name}
             </h3>
-            {product.status === "live" && (
-              <motion.span
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.3, duration: 0.4 }}
-                className="inline-flex items-center gap-1.5 rounded-full border border-border bg-muted/50 px-2.5 py-1 text-xs font-medium text-foreground"
-              >
-                <span className="relative flex h-1.5 w-1.5">
-                  <motion.span
-                    className="absolute inline-flex h-full w-full rounded-full bg-foreground opacity-75"
-                    animate={{ scale: [1, 1.5, 1], opacity: [0.75, 0, 0.75] }}
-                    transition={{
-                      duration: 1.5,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                  />
-                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-foreground" />
-                </span>
-                Live
-              </motion.span>
-            )}
+            {product.status === "live" && <LiveBadge delay={0.5 + index * 0.1} />}
           </div>
           <p className="text-sm leading-relaxed text-muted-foreground">
             {product.description}
           </p>
         </div>
-        <motion.span
-          className="shrink-0"
-          whileHover={{ x: 2, y: -2 }}
-          transition={{ type: "spring", stiffness: 400, damping: 17 }}
+
+        <motion.div
+          className="shrink-0 mt-1"
+          initial={{ opacity: 0, x: -4 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.6, duration: 0.4 }}
         >
-          <ArrowUpRight
-            size={20}
-            className="text-muted-foreground transition-colors group-hover:text-foreground"
-          />
-        </motion.span>
+          <motion.div
+            whileHover={{ x: 2, y: -2 }}
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}
+          >
+            <ArrowUpRight
+              size={20}
+              className="text-muted-foreground transition-colors group-hover:text-foreground"
+            />
+          </motion.div>
+        </motion.div>
       </div>
     </motion.a>
+  );
+}
+
+function LiveBadge({ delay }: { delay: number }) {
+  return (
+    <motion.span
+      initial={{ opacity: 0, scale: 0.8, filter: "blur(4px)" }}
+      whileInView={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+      viewport={{ once: true }}
+      transition={{ delay, duration: 0.5, ease: [0.25, 0.4, 0.25, 1] }}
+      className="inline-flex items-center gap-1.5 rounded-full border border-border bg-muted/50 px-2.5 py-1 text-xs font-medium text-foreground"
+    >
+      <span className="relative flex h-1.5 w-1.5">
+        <motion.span
+          className="absolute inline-flex h-full w-full rounded-full bg-foreground"
+          animate={{
+            scale: [1, 2, 1],
+            opacity: [0.6, 0, 0.6],
+          }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            ease: "easeOut",
+          }}
+        />
+        <motion.span
+          className="relative inline-flex h-1.5 w-1.5 rounded-full bg-foreground"
+          animate={{ opacity: [1, 0.7, 1] }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+      </span>
+      Live
+    </motion.span>
   );
 }
