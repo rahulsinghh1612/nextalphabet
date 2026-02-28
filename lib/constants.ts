@@ -3,12 +3,14 @@ export const siteConfig = {
   description:
     "Building simple products that solve real, practical problems.",
   url: "https://www.nextalphabet.com",
-  twitter: "https://x.com/nextalphabet",
+  twitter: "https://x.com/nextalphabet_",
 };
 
 export const founder = {
   name: "Rahul Singh",
   role: "Founder",
+  twitter: "https://x.com/rahulsinghh__",
+  twitterHandle: "@rahulsinghh__",
 };
 
 export const navLinks = [
@@ -27,7 +29,7 @@ export interface Product {
 
 export const products: Product[] = [
   {
-    name: "PNLCard",
+    name: "PnLCard",
     tagline: "Log. Share. Grow.",
     description:
       "Beautiful trading recap cards for X and Instagram. Log your P&L in 60 seconds.",

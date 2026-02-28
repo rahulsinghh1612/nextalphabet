@@ -11,8 +11,7 @@ const heroWords = [
   "products",
   "that",
   "solve",
-  "real,",
-  "practical",
+  "real",
   "problems.",
 ];
 
@@ -93,9 +92,17 @@ export default function Home() {
               duration: 0.5,
               ease: [0.22, 1, 0.36, 1],
             }}
-            className="flex justify-center"
+            className="flex flex-col items-center gap-4"
           >
-            <Button href="/products">Products</Button>
+            <Button href="/products">Explore Products</Button>
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.1, duration: 0.6 }}
+              className="text-xs text-muted-foreground"
+            >
+              See what we&apos;re shipping
+            </motion.p>
           </motion.div>
         </div>
 

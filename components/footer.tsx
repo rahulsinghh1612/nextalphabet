@@ -1,14 +1,13 @@
 import Link from "next/link";
 import { siteConfig, navLinks } from "@/lib/constants";
+import { Logo } from "@/components/logo";
 
 export function Footer() {
   return (
     <footer className="border-t border-border bg-muted/40">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 px-6 py-10 md:flex-row md:gap-0">
-        <div className="flex flex-col items-center gap-1 md:items-start">
-          <span className="text-sm font-semibold text-foreground">
-            {siteConfig.name}
-          </span>
+        <div className="flex flex-col items-center gap-1.5 md:items-start">
+          <Logo size="sm" />
           <span className="text-xs text-muted-foreground">
             &copy; {new Date().getFullYear()} {siteConfig.name}
           </span>

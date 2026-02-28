@@ -4,7 +4,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { siteConfig, navLinks } from "@/lib/constants";
+import { navLinks } from "@/lib/constants";
+import { Logo } from "@/components/logo";
 import { Menu, X } from "lucide-react";
 
 export function Navbar() {
@@ -34,11 +35,8 @@ export function Navbar() {
       }`}
     >
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <Link
-          href="/"
-          className="text-lg font-semibold tracking-tight text-foreground"
-        >
-          {siteConfig.name}
+        <Link href="/" className="text-foreground">
+          <Logo />
         </Link>
 
         {/* Desktop nav */}
