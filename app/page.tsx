@@ -64,8 +64,8 @@ export default function Home() {
 
   return (
     <>
-      {/* Hero */}
-      <section className="relative flex min-h-[65vh] items-center justify-center overflow-hidden px-6 md:min-h-[88vh]">
+      {/* Hero - full screen on mobile so content is centered, product section below fold */}
+      <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-6 md:min-h-[88vh]">
         {/* Animated dot grid */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           <motion.div
