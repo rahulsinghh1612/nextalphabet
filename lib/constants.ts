@@ -32,7 +32,7 @@ export const products: Product[] = [
     name: "PnLCard",
     tagline: "Log. Share. Grow.",
     description:
-      "Beautiful trading recap cards for X and Instagram. Log your P&L in 60 seconds.",
+      "The trading journal that takes 60 seconds a day.",
     url: "https://www.pnlcard.com",
     features: [],
     status: "live",

@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/button";
 import { products } from "@/lib/constants";
@@ -58,6 +59,9 @@ function ZStroke() {
 }
 
 export default function Home() {
+  const productRef = useRef<HTMLElement>(null);
+  const productInView = useInView(productRef, { amount: 0.1 });
+
   return (
     <>
       {/* Hero */}
@@ -88,14 +92,14 @@ export default function Home() {
           <div className="relative mb-8 md:mb-14">
             <ZStroke />
 
-            <div className="relative grid grid-cols-1 gap-2 sm:gap-3 md:gap-4">
+            <div className="relative grid grid-cols-1 gap-2 sm:gap-3 md:gap-4 justify-items-center md:justify-items-stretch">
               {/* Line 1: "Real Problems." — centered on mobile, left on desktop */}
-              <div className="overflow-hidden text-center md:text-left">
+              <div className="overflow-hidden flex justify-center md:justify-start w-full">
                 <motion.h1
                   initial={{ x: "-100%", opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ duration: 0.8, ease, delay: 0.15 }}
-                  className="text-4xl font-bold leading-[1.1] tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl whitespace-nowrap"
+                  className="text-4xl font-bold leading-[1.1] tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl whitespace-nowrap inline-block md:block"
                 >
                   Real Problems
                   <PulsingPeriod delay={0.95} />
@@ -103,12 +107,12 @@ export default function Home() {
               </div>
 
               {/* Line 2: "Simple Products." — centered on mobile, right on desktop */}
-              <div className="overflow-hidden text-center md:text-right">
+              <div className="overflow-hidden flex justify-center md:justify-end w-full">
                 <motion.h1
                   initial={{ x: "100%", opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ duration: 0.8, ease, delay: 0.4 }}
-                  className="text-4xl font-bold leading-[1.1] tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl whitespace-nowrap"
+                  className="text-4xl font-bold leading-[1.1] tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl whitespace-nowrap inline-block md:block"
                 >
                   Simple Products
                   <PulsingPeriod delay={1.2} />
@@ -136,37 +140,39 @@ export default function Home() {
           </motion.div>
         </div>
 
-        {/* Animated divider - hidden on mobile to avoid awkward line */}
+        {/* Animated divider - below fold on mobile, visible once user scrolls */}
         <motion.div
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ delay: 1.5, duration: 0.8, ease }}
-          className="absolute bottom-0 left-0 right-0 hidden h-px origin-left bg-border md:block"
+          className="absolute bottom-0 left-0 right-0 h-px origin-left bg-border"
         />
 
-        {/* Scroll indicator - hints that more content is below */}
+        {/* Scroll indicator - hides when product section scrolls into view */}
         <motion.a
           href="#product"
           aria-label="Scroll to products"
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 2, duration: 0.5 }}
-          className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-muted-foreground hover:text-foreground transition-colors"
+          animate={{
+            opacity: productInView ? 0 : 1,
+          }}
+          transition={{ delay: productInView ? 0 : 2, duration: 0.5 }}
+          className={`absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-0.5 text-muted-foreground hover:text-foreground transition-colors ${productInView ? "pointer-events-none" : ""}`}
         >
-          <span className="text-[10px] font-medium uppercase tracking-widest">
-            Scroll
-          </span>
           <motion.div
             animate={{ y: [0, 4, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            className="flex flex-col items-center gap-0.5"
           >
-            <ChevronDown size={20} strokeWidth={2} />
+            <ChevronDown size={16} strokeWidth={2} />
+            <ChevronDown size={16} strokeWidth={2} />
+            <ChevronDown size={16} strokeWidth={2} />
           </motion.div>
         </motion.a>
       </section>
 
       {/* Product section */}
-      <section id="product" className="relative px-6 py-24 md:py-32">
+      <section ref={productRef} id="product" className="relative px-6 py-24 md:py-32">
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
