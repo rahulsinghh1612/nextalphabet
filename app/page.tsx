@@ -88,8 +88,8 @@ export default function Home() {
             <ZStroke />
 
             <div className="relative grid grid-cols-1 gap-2 sm:gap-3 md:gap-4">
-              {/* Line 1: "Real Problems." — slides in from left */}
-              <div className="text-left overflow-hidden">
+              {/* Line 1: "Real Problems." — centered on mobile, left on desktop */}
+              <div className="overflow-hidden text-center md:text-left">
                 <motion.h1
                   initial={{ x: "-100%", opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
@@ -101,8 +101,8 @@ export default function Home() {
                 </motion.h1>
               </div>
 
-              {/* Line 2: "Simple Products." — slides in from right */}
-              <div className="text-right overflow-hidden">
+              {/* Line 2: "Simple Products." — centered on mobile, right on desktop */}
+              <div className="overflow-hidden text-center md:text-right">
                 <motion.h1
                   initial={{ x: "100%", opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
@@ -135,12 +135,12 @@ export default function Home() {
           </motion.div>
         </div>
 
-        {/* Animated divider */}
+        {/* Animated divider - hidden on mobile to avoid awkward line */}
         <motion.div
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ delay: 1.5, duration: 0.8, ease }}
-          className="absolute bottom-0 left-0 right-0 h-px origin-left bg-border"
+          className="absolute bottom-0 left-0 right-0 hidden h-px origin-left bg-border md:block"
         />
       </section>
 
