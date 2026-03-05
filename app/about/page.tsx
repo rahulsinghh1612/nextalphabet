@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { founder, siteConfig } from "@/lib/constants";
+import { founder } from "@/lib/constants";
 
 export default function AboutPage() {
   return (
@@ -31,19 +31,11 @@ export default function AboutPage() {
           transition={{ duration: 0.5, delay: 0.15 }}
           className="flex flex-col gap-4 border-t border-border pt-8 sm:flex-row sm:items-center sm:justify-between"
         >
-          <div className="flex flex-col gap-1">
-            <p className="text-sm text-foreground">
-              <span className="font-semibold">{founder.name}</span>
-              <span className="mx-2 text-muted-foreground">·</span>
-              <span className="text-muted-foreground">{founder.role}</span>
-            </p>
-            <a
-              href={`mailto:${siteConfig.email}`}
-              className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-            >
-              {siteConfig.email}
-            </a>
-          </div>
+          <p className="text-sm text-foreground">
+            <span className="font-semibold">{founder.name}</span>
+            <span className="mx-2 text-muted-foreground">·</span>
+            <span className="text-muted-foreground">{founder.role}</span>
+          </p>
           <a
             href={founder.twitter}
             target="_blank"
