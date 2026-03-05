@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/button";
 import { products } from "@/lib/constants";
 import { ProductCard } from "@/components/product-card";
@@ -60,7 +61,7 @@ export default function Home() {
   return (
     <>
       {/* Hero */}
-      <section className="relative flex min-h-[88vh] items-center justify-center overflow-hidden px-6">
+      <section className="relative flex min-h-[65vh] items-center justify-center overflow-hidden px-6 md:min-h-[88vh]">
         {/* Animated dot grid */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           <motion.div
@@ -84,7 +85,7 @@ export default function Home() {
 
         <div className="relative mx-auto w-full max-w-4xl">
           {/* Z-shaped headline with connecting stroke */}
-          <div className="relative mb-14">
+          <div className="relative mb-8 md:mb-14">
             <ZStroke />
 
             <div className="relative grid grid-cols-1 gap-2 sm:gap-3 md:gap-4">
@@ -142,10 +143,30 @@ export default function Home() {
           transition={{ delay: 1.5, duration: 0.8, ease }}
           className="absolute bottom-0 left-0 right-0 hidden h-px origin-left bg-border md:block"
         />
+
+        {/* Scroll indicator - hints that more content is below */}
+        <motion.a
+          href="#product"
+          aria-label="Scroll to products"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2, duration: 0.5 }}
+          className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-muted-foreground hover:text-foreground transition-colors"
+        >
+          <span className="text-[10px] font-medium uppercase tracking-widest">
+            Scroll
+          </span>
+          <motion.div
+            animate={{ y: [0, 4, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <ChevronDown size={20} strokeWidth={2} />
+          </motion.div>
+        </motion.a>
       </section>
 
       {/* Product section */}
-      <section className="relative px-6 py-24 md:py-32">
+      <section id="product" className="relative px-6 py-24 md:py-32">
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
