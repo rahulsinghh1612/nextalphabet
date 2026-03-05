@@ -13,7 +13,7 @@ export function Footer() {
           </span>
         </div>
 
-        <div className="flex items-center gap-6">
+        <div className="flex flex-wrap items-center justify-center gap-6 md:justify-end">
           {navLinks.map((link) => (
             <Link
               key={link.href}
@@ -23,6 +23,12 @@ export function Footer() {
               {link.label}
             </Link>
           ))}
+          <a
+            href={`mailto:${siteConfig.email}`}
+            className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+          >
+            {siteConfig.email}
+          </a>
           <a
             href={siteConfig.twitter}
             target="_blank"

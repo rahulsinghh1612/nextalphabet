@@ -4,6 +4,7 @@ export const siteConfig = {
     "Building simple products that solve real, practical problems.",
   url: "https://www.nextalphabet.com",
   twitter: "https://x.com/nextalphabet_",
+  email: "contact@nextalphabet.com",
 };
 
 export const founder = {
