@@ -24,12 +24,6 @@ export function Footer() {
             </Link>
           ))}
           <a
-            href={`mailto:${siteConfig.email}`}
-            className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-          >
-            {siteConfig.email}
-          </a>
-          <a
             href={siteConfig.twitter}
             target="_blank"
             rel="noopener noreferrer"

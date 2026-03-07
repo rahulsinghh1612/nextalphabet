@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { founder } from "@/lib/constants";
+import { Mail } from "lucide-react";
+import { founder, siteConfig } from "@/lib/constants";
 
 export default function AboutPage() {
   return (
@@ -37,13 +38,11 @@ export default function AboutPage() {
             <span className="text-muted-foreground">{founder.role}</span>
           </p>
           <a
-            href={founder.twitter}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={`mailto:${siteConfig.email}`}
             className="inline-flex w-fit items-center gap-2 rounded-full border border-border bg-white px-4 py-2 text-xs font-medium text-foreground transition-colors hover:bg-muted"
           >
-            <span className="text-sm">𝕏</span>
-            {founder.twitterHandle}
+            <Mail size={14} className="text-muted-foreground" />
+            {siteConfig.email}
           </a>
         </motion.div>
       </div>
