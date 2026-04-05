@@ -38,4 +38,13 @@ export const products: Product[] = [
     features: [],
     status: "live",
   },
+  {
+    name: "ToneScribe",
+    tagline: "Voice to Note.",
+    description:
+      "Record your thoughts, let AI turn them into emails, tweets, posts, and more.",
+    url: "https://tonescribe.com",
+    features: [],
+    status: "live",
+  },
 ];

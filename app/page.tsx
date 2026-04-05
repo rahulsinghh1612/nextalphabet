@@ -171,7 +171,7 @@ export default function Home() {
         </motion.a>
       </section>
 
-      {/* Product section */}
+      {/* Products section */}
       <section ref={productRef} id="product" className="relative px-6 py-24 md:py-32">
         <motion.div
           initial={{ opacity: 0 }}
@@ -187,9 +187,13 @@ export default function Home() {
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
             className="mb-6 text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground"
           >
-            Product
+            Products
           </motion.p>
-          <ProductCard product={products[0]} index={0} />
+          <div className="space-y-4">
+            {products.map((product, i) => (
+              <ProductCard key={product.name} product={product} index={i} />
+            ))}
+          </div>
         </motion.div>
       </section>
 
