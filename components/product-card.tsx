@@ -41,7 +41,13 @@ export function ProductCard({
             {product.status === "live" && <LiveBadge delay={0.5 + index * 0.1} />}
           </div>
           <p className="whitespace-pre-line text-sm leading-relaxed text-muted-foreground">
-            {product.description}
+            {product.description.includes("effortlessly")
+              ? <>
+                  {product.description.split("effortlessly")[0]}
+                  <em className="italic">effortlessly</em>
+                  {product.description.split("effortlessly")[1]}
+                </>
+              : product.description}
           </p>
         </div>
 

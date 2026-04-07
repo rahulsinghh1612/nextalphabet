@@ -101,7 +101,7 @@ export function LaunchBanner() {
                 ToneScribe
               </span>
               <span> is live</span>
-              <span className="hidden sm:inline"> — Voice to Note, effortlessly</span>
+              <span className="hidden sm:inline"> — Voice to Note, <em className="italic font-normal">effortlessly</em></span>
             </span>
 
             {/* Arrow */}
