@@ -128,7 +128,7 @@ export default function Home() {
             transition={{ delay: 1.3, duration: 0.5, ease }}
             className="flex flex-col items-center gap-4"
           >
-            <Button href="/products">Explore Products</Button>
+            <Button href="/products" showArrow={false}>Explore Products</Button>
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
