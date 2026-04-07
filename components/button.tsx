@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { type ReactNode } from "react";
 
 interface ButtonProps {
@@ -48,7 +48,7 @@ export function Button({
         {...linkProps}
       >
         {children}
-        {showArrow && <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />}
+        {showArrow && <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />}
       </Link>
     </motion.div>
   );

@@ -100,8 +100,7 @@ export function LaunchBanner() {
               <span className="font-semibold text-white/90 transition-colors duration-200 group-hover:text-white">
                 ToneScribe
               </span>
-              <span className="hidden sm:inline"> is live</span>
-              <span className="sm:hidden"> — Live</span>
+              <span> is live</span>
               <span className="hidden sm:inline"> — Voice to Note, effortlessly</span>
             </span>
 
