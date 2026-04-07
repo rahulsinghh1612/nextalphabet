@@ -30,20 +30,20 @@ export interface Product {
 
 export const products: Product[] = [
   {
+    name: "ToneScribe",
+    tagline: "Voice to Note.",
+    description:
+      "Voice to note effortlessly.\nCompose it into anything.",
+    url: "https://tonescribe.com",
+    features: [],
+    status: "live",
+  },
+  {
     name: "PnLCard",
     tagline: "Log. Share. Grow.",
     description:
       "The trading journal that only takes 60 seconds a day.",
     url: "https://www.pnlcard.com",
-    features: [],
-    status: "live",
-  },
-  {
-    name: "ToneScribe",
-    tagline: "Voice to Note.",
-    description:
-      "Record your thoughts, let AI turn them into emails, tweets, posts, and more.",
-    url: "https://tonescribe.com",
     features: [],
     status: "live",
   },

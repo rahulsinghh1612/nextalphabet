@@ -40,7 +40,7 @@ export function ProductCard({
             </h3>
             {product.status === "live" && <LiveBadge delay={0.5 + index * 0.1} />}
           </div>
-          <p className="text-sm leading-relaxed text-muted-foreground">
+          <p className="whitespace-pre-line text-sm leading-relaxed text-muted-foreground">
             {product.description}
           </p>
         </div>
