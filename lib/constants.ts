@@ -24,6 +24,9 @@ export interface Product {
   tagline: string;
   description: string;
   url: string;
+  icon: string;
+  /** "R, G, B" — used for a subtle per-product hover tint on the product card */
+  accent: string;
   features: string[];
   status: "live" | "coming-soon";
 }
@@ -31,10 +34,12 @@ export interface Product {
 export const products: Product[] = [
   {
     name: "ToneScribe",
-    tagline: "Voice to Note.",
+    tagline: "Type 4x faster.",
     description:
-      "Voice to Note effortlessly. Compose it into anything.",
+      "100% private, on-device dictation. Works in every app.",
     url: "https://tonescribe.com",
+    icon: "/icons/tonescribe.png",
+    accent: "39, 39, 42",
     features: [],
     status: "live",
   },
@@ -44,6 +49,19 @@ export const products: Product[] = [
     description:
       "The trading journal that only takes 60 seconds a day.",
     url: "https://www.pnlcard.com",
+    icon: "/icons/pnlcard.svg",
+    accent: "22, 163, 74",
+    features: [],
+    status: "live",
+  },
+  {
+    name: "Biscuit",
+    tagline: "Screenshots in minutes.",
+    description:
+      "The easiest way to make beautiful App Store & Google Play screenshots.",
+    url: "https://www.meetbiscuit.com",
+    icon: "/icons/biscuit.png",
+    accent: "59, 130, 246",
     features: [],
     status: "live",
   },

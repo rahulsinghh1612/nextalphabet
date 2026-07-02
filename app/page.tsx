@@ -1,8 +1,7 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
-import { ChevronDown } from "lucide-react";
+import Image from "next/image";
+import { motion } from "framer-motion";
 import { Button } from "@/components/button";
 import { products } from "@/lib/constants";
 import { ProductCard } from "@/components/product-card";
@@ -33,39 +32,11 @@ function PulsingPeriod({ delay }: { delay: number }) {
   );
 }
 
-function ZStroke() {
-  return (
-    <motion.svg
-      className="pointer-events-none absolute inset-0 hidden h-full w-full md:block"
-      viewBox="0 0 800 200"
-      preserveAspectRatio="none"
-      fill="none"
-      aria-hidden="true"
-    >
-      <motion.line
-        x1="420"
-        y1="55"
-        x2="380"
-        y2="145"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        className="text-border"
-        initial={{ pathLength: 0, opacity: 0 }}
-        animate={{ pathLength: 1, opacity: 1 }}
-        transition={{ delay: 0.9, duration: 0.7, ease }}
-      />
-    </motion.svg>
-  );
-}
-
 export default function Home() {
-  const productRef = useRef<HTMLElement>(null);
-  const productInView = useInView(productRef, { amount: 0.1 });
-
   return (
     <>
-      {/* Hero - full screen on mobile so content is centered, product section below fold */}
-      <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-6 md:min-h-[88vh]">
+      {/* Hero */}
+      <section className="relative flex items-center justify-center overflow-hidden px-6 pt-28 pb-16 md:pt-36 md:pb-20">
         {/* Animated dot grid */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           <motion.div
@@ -88,10 +59,8 @@ export default function Home() {
         </div>
 
         <div className="relative mx-auto w-full max-w-4xl">
-          {/* Z-shaped headline with connecting stroke */}
+          {/* Z-shaped headline */}
           <div className="relative mb-8 md:mb-14">
-            <ZStroke />
-
             <div className="relative grid grid-cols-1 gap-2 sm:gap-3 md:gap-4 justify-items-center md:justify-items-stretch">
               {/* Line 1: "Real Problems." — centered on mobile, left on desktop */}
               <div className="overflow-hidden flex justify-center md:justify-start w-full">
@@ -99,7 +68,7 @@ export default function Home() {
                   initial={{ x: "-100%", opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ duration: 0.8, ease, delay: 0.15 }}
-                  className="text-4xl font-bold leading-[1.1] tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl whitespace-nowrap inline-block md:block"
+                  className="text-3xl font-bold leading-[1.1] tracking-tight text-foreground sm:text-4xl md:text-5xl lg:text-6xl whitespace-nowrap inline-block md:block"
                 >
                   Real Problems
                   <PulsingPeriod delay={0.95} />
@@ -112,7 +81,7 @@ export default function Home() {
                   initial={{ x: "100%", opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ duration: 0.8, ease, delay: 0.4 }}
-                  className="text-4xl font-bold leading-[1.1] tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl whitespace-nowrap inline-block md:block"
+                  className="text-3xl font-bold leading-[1.1] tracking-tight text-foreground sm:text-4xl md:text-5xl lg:text-6xl whitespace-nowrap inline-block md:block"
                 >
                   Simple Products
                   <PulsingPeriod delay={1.2} />
@@ -137,48 +106,53 @@ export default function Home() {
             >
               See what we&apos;re shipping
             </motion.p>
+
+            {/* Product icon strip — surfaces the lineup without scrolling */}
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.9, duration: 0.5, ease }}
+              className="mt-2 flex items-center gap-4"
+            >
+              {products.map((product) => (
+                <a
+                  key={product.name}
+                  href={product.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title={product.name}
+                  className="group relative h-9 w-9 shrink-0 overflow-hidden rounded-full border border-border shadow-sm transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-md sm:h-10 sm:w-10"
+                >
+                  <Image
+                    src={product.icon}
+                    alt={`${product.name} icon`}
+                    fill
+                    sizes="40px"
+                    className="object-cover"
+                  />
+                </a>
+              ))}
+            </motion.div>
           </motion.div>
         </div>
 
-        {/* Animated divider - below fold on mobile, visible once user scrolls */}
+        {/* Divider */}
         <motion.div
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ delay: 1.5, duration: 0.8, ease }}
           className="absolute bottom-0 left-0 right-0 h-px origin-left bg-border"
         />
-
-        {/* Scroll indicator - hides when product section scrolls into view */}
-        <motion.a
-          href="#product"
-          aria-label="Scroll to products"
-          initial={{ opacity: 0 }}
-          animate={{
-            opacity: productInView ? 0 : 1,
-          }}
-          transition={{ delay: productInView ? 0 : 2, duration: 0.5 }}
-          className={`absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-0.5 text-muted-foreground hover:text-foreground transition-colors ${productInView ? "pointer-events-none" : ""}`}
-        >
-          <motion.div
-            animate={{ y: [0, 4, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="flex flex-col items-center gap-0.5"
-          >
-            <ChevronDown size={16} strokeWidth={2} />
-            <ChevronDown size={16} strokeWidth={2} />
-            <ChevronDown size={16} strokeWidth={2} />
-          </motion.div>
-        </motion.a>
       </section>
 
       {/* Products section */}
-      <section ref={productRef} id="product" className="relative px-6 py-24 md:py-32">
+      <section id="product" className="relative px-6 py-16 md:py-20">
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.5 }}
-          className="mx-auto max-w-xl"
+          className="mx-auto max-w-5xl"
         >
           <motion.p
             initial={{ opacity: 0, x: -12 }}
@@ -189,7 +163,7 @@ export default function Home() {
           >
             Products
           </motion.p>
-          <div className="space-y-4">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {products.map((product, i) => (
               <ProductCard key={product.name} product={product} index={i} />
             ))}
@@ -198,7 +172,7 @@ export default function Home() {
       </section>
 
       {/* Next product teaser */}
-      <section className="border-t border-border px-6 py-24 md:py-32">
+      <section className="border-t border-border px-6 py-20 md:py-24">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

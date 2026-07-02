@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import type { Product } from "@/lib/constants";
@@ -25,49 +26,48 @@ export function ProductCard({
         delay: index * 0.1,
       }}
       whileHover={{ y: -4, transition: { duration: 0.25 } }}
-      className="group relative block overflow-hidden rounded-2xl border border-border bg-white p-6 shadow-sm transition-shadow duration-300 hover:shadow-md md:p-8"
+      className="group relative block h-full overflow-hidden rounded-2xl border border-border bg-white p-6 shadow-sm transition-shadow duration-300 hover:shadow-md"
     >
-      {/* Shimmer sweep on hover */}
-      <motion.div
-        className="pointer-events-none absolute inset-0 shimmer opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+      {/* Per-product accent wash on hover */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        style={{
+          background: `radial-gradient(circle at 20% 0%, rgba(${product.accent}, 0.08), transparent 70%)`,
+        }}
       />
 
-      <div className="relative flex items-start justify-between gap-6">
-        <div className="min-w-0 flex-1">
-          <div className="mb-2 flex items-center gap-3">
-            <h3 className="text-lg font-semibold text-foreground md:text-xl">
-              {product.name}
-            </h3>
-            {product.status === "live" && <LiveBadge delay={0.5 + index * 0.1} />}
-          </div>
-          <p className="whitespace-pre-line text-sm leading-relaxed text-muted-foreground">
-            {product.description.includes("effortlessly")
-              ? <>
-                  {product.description.split("effortlessly")[0]}
-                  <em className="italic">effortlessly</em>
-                  {product.description.split("effortlessly")[1]}
-                </>
-              : product.description}
-          </p>
+      <div className="relative flex items-start justify-between">
+        <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-2xl shadow-sm">
+          <Image
+            src={product.icon}
+            alt={`${product.name} icon`}
+            fill
+            sizes="56px"
+            className="object-cover"
+          />
         </div>
 
         <motion.div
-          className="shrink-0 mt-1"
-          initial={{ opacity: 0, x: -4 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.6, duration: 0.4 }}
+          whileHover={{ x: 2, y: -2 }}
+          transition={{ type: "spring", stiffness: 400, damping: 17 }}
         >
-          <motion.div
-            whileHover={{ x: 2, y: -2 }}
-            transition={{ type: "spring", stiffness: 400, damping: 17 }}
-          >
-            <ArrowUpRight
-              size={20}
-              className="text-muted-foreground transition-colors group-hover:text-foreground"
-            />
-          </motion.div>
+          <ArrowUpRight
+            size={18}
+            className="text-muted-foreground/60 transition-colors group-hover:text-foreground"
+          />
         </motion.div>
+      </div>
+
+      <div className="relative mt-4">
+        <div className="mb-1.5 flex items-center gap-2.5">
+          <h3 className="text-lg font-semibold text-foreground">
+            {product.name}
+          </h3>
+          {product.status === "live" && <LiveBadge delay={0.5 + index * 0.1} />}
+        </div>
+        <p className="whitespace-pre-line text-sm leading-relaxed text-muted-foreground">
+          {product.description}
+        </p>
       </div>
     </motion.a>
   );
