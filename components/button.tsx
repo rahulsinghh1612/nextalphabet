@@ -23,13 +23,13 @@ export function Button({
   showArrow = true,
 }: ButtonProps) {
   const baseStyles =
-    "group relative inline-flex items-center justify-center gap-2 rounded-full text-sm font-medium transition-all duration-300";
+    "group relative inline-flex items-center justify-center gap-2 rounded-xl text-sm font-medium transition-all duration-300";
 
   const variants = {
     primary:
-      "bg-foreground text-background px-7 py-3.5 hover:shadow-[0_0_24px_rgba(0,0,0,0.15)]",
+      "bg-foreground text-background px-5 py-2.5 hover:shadow-[0_0_24px_rgba(0,0,0,0.15)]",
     secondary:
-      "border border-border bg-white text-foreground px-7 py-3.5 hover:bg-muted hover:border-foreground/20",
+      "border border-border bg-white text-foreground px-5 py-2.5 hover:bg-muted hover:border-foreground/20",
   };
 
   const linkProps = external

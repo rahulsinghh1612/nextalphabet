@@ -23,14 +23,6 @@ export function Footer() {
               {link.label}
             </Link>
           ))}
-          <a
-            href={siteConfig.twitter}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-          >
-            𝕏
-          </a>
         </div>
       </div>
     </footer>

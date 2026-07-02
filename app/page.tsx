@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { Button } from "@/components/button";
 import { products } from "@/lib/constants";
@@ -106,43 +105,8 @@ export default function Home() {
             >
               See what we&apos;re shipping
             </motion.p>
-
-            {/* Product icon strip — surfaces the lineup without scrolling */}
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.9, duration: 0.5, ease }}
-              className="mt-2 flex items-center gap-4"
-            >
-              {products.map((product) => (
-                <a
-                  key={product.name}
-                  href={product.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  title={product.name}
-                  className="group relative h-9 w-9 shrink-0 overflow-hidden rounded-full border border-border shadow-sm transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-md sm:h-10 sm:w-10"
-                >
-                  <Image
-                    src={product.icon}
-                    alt={`${product.name} icon`}
-                    fill
-                    sizes="40px"
-                    className="object-cover"
-                  />
-                </a>
-              ))}
-            </motion.div>
           </motion.div>
         </div>
-
-        {/* Divider */}
-        <motion.div
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: 1 }}
-          transition={{ delay: 1.5, duration: 0.8, ease }}
-          className="absolute bottom-0 left-0 right-0 h-px origin-left bg-border"
-        />
       </section>
 
       {/* Products section */}
@@ -159,7 +123,7 @@ export default function Home() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="mb-6 text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground"
+            className="mb-6 text-xs font-medium tracking-[0.2em] text-muted-foreground"
           >
             Products
           </motion.p>
@@ -172,7 +136,7 @@ export default function Home() {
       </section>
 
       {/* Next product teaser */}
-      <section className="border-t border-border px-6 py-20 md:py-24">
+      <section className="px-6 py-20 md:py-24">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
