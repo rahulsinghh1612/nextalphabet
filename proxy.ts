@@ -16,5 +16,7 @@ export function proxy(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!_next|api|favicon.ico).*)"],
+  // Exclude _next, api, and any path with a file extension (static assets
+  // like /icons/traction.png) so only actual pages get the /traction prefix.
+  matcher: ["/((?!_next|api|.*\\.).*)"],
 };
