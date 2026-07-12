@@ -11,10 +11,10 @@ export default function TractionTermsPage() {
     <LegalPage title="Terms of Use" updated="12 July 2026">
       <p>
         These Terms of Use (&quot;Terms&quot;) govern your use of Traction
-        (the &quot;App&quot;), provided by Next Alphabet and operated by
-        Rahul Singh (&quot;we&quot;, &quot;us&quot;, or &quot;our&quot;). By
-        downloading, installing, or using the App, you agree to be bound by
-        these Terms. If you do not agree, please do not use the App.
+        (the &quot;App&quot;), made by Rahul Singh (&quot;we&quot;,
+        &quot;us&quot;, or &quot;our&quot;). By downloading, installing, or
+        using the App, you agree to be bound by these Terms. If you do not
+        agree, please do not use the App.
       </p>
 
       <h2>Eligibility</h2>
@@ -119,7 +119,7 @@ export default function TractionTermsPage() {
       <h2>Intellectual property</h2>
       <p>
         The App, including its design, graphics, logos, and underlying
-        software, is owned by Next Alphabet or its licensors and is
+        software, is owned by Rahul Singh or his licensors and is
         protected by applicable intellectual property laws. These Terms do
         not grant you any rights to our trademarks or branding beyond what
         is needed to use the App as intended.
@@ -147,8 +147,8 @@ export default function TractionTermsPage() {
 
       <h2>Limitation of liability</h2>
       <p>
-        To the maximum extent permitted by applicable law, Next Alphabet
-        and Rahul Singh shall not be liable for any indirect, incidental,
+        To the maximum extent permitted by applicable law, Rahul Singh
+        shall not be liable for any indirect, incidental,
         special, consequential, or punitive damages, or for any loss of
         data, arising out of or related to your use of, or inability to
         use, the App, even if advised of the possibility of such damages.
@@ -159,9 +159,9 @@ export default function TractionTermsPage() {
 
       <h2>Indemnification</h2>
       <p>
-        You agree to indemnify and hold harmless Next Alphabet and Rahul
-        Singh from any claims, damages, losses, or expenses arising from
-        your violation of these Terms or your misuse of the App.
+        You agree to indemnify and hold harmless Rahul Singh from any
+        claims, damages, losses, or expenses arising from your violation of
+        these Terms or your misuse of the App.
       </p>
 
       <h2>Termination</h2>
