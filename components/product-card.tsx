@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Globe2, Monitor, Smartphone } from "lucide-react";
 import type { Product } from "@/lib/constants";
 
 export function ProductCard({
@@ -26,7 +26,7 @@ export function ProductCard({
         delay: index * 0.1,
       }}
       whileHover={{ y: -4, transition: { duration: 0.25 } }}
-      className="group relative block h-full overflow-hidden rounded-2xl border border-border bg-white p-6 shadow-sm transition-shadow duration-300 hover:shadow-md"
+      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-white p-6 shadow-sm transition-shadow duration-300 hover:shadow-md"
     >
       {/* Per-product accent wash on hover */}
       <div
@@ -69,7 +69,28 @@ export function ProductCard({
           {product.description}
         </p>
       </div>
+
+      <div className="relative mt-auto flex flex-wrap items-center gap-3 pt-5">
+        {product.platforms.map((platform) => (
+          <Platform key={platform} platform={platform} />
+        ))}
+      </div>
     </motion.a>
+  );
+}
+
+function Platform({ platform }: { platform: Product["platforms"][number] }) {
+  const config = {
+    web: { label: "Web", Icon: Globe2 },
+    macos: { label: "macOS", Icon: Monitor },
+    iphone: { label: "iPhone", Icon: Smartphone },
+  }[platform];
+
+  return (
+    <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
+      <config.Icon className="h-3.5 w-3.5" strokeWidth={1.8} />
+      {config.label}
+    </span>
   );
 }
 

@@ -5,10 +5,17 @@ import { NextRequest, NextResponse } from "next/server";
 export function proxy(req: NextRequest) {
   const host = req.headers.get("host") ?? "";
   const isTractionSubdomain = host.startsWith("traction.");
+  const isBuildSubdomain = host.startsWith("build.");
 
   if (isTractionSubdomain && !req.nextUrl.pathname.startsWith("/traction")) {
     const url = req.nextUrl.clone();
     url.pathname = `/traction${req.nextUrl.pathname}`;
+    return NextResponse.rewrite(url);
+  }
+
+  if (isBuildSubdomain && !req.nextUrl.pathname.startsWith("/build")) {
+    const url = req.nextUrl.clone();
+    url.pathname = `/build${req.nextUrl.pathname}`;
     return NextResponse.rewrite(url);
   }
 
