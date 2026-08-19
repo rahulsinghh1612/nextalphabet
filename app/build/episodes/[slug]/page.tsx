@@ -7,6 +7,7 @@ import { notFound, redirect } from "next/navigation";
 import { buildEpisodes } from "@/lib/build";
 import { CopyPrompt } from "@/components/copy-prompt";
 import { BuildIntro } from "@/components/build-intro";
+import { AppStoreSubmissionChecklist } from "@/components/app-store-submission-checklist";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
@@ -938,6 +939,517 @@ Mark uncertain answers with [VERIFY].`}
             </section>
           </div>
         ) : null}
+
+        {episode.number === 7 ? (
+          <div className="space-y-10 text-[15px] leading-7">
+            <section>
+              <div className="space-y-4 text-muted-foreground">
+                <p>AI coding agents are already very good at building websites. But without the right context and tools, the result can still feel generic.</p>
+                <p>The answer is not another prompt asking the agent to “make it look better.” Give it a better workflow for design direction, components, review, and testing.</p>
+                <p>These are the four tools I would add.</p>
+              </div>
+            </section>
+
+            <section>
+              <h2 className="mb-4 text-lg font-semibold tracking-tight">The simple mental model</h2>
+              <div className="space-y-4 text-muted-foreground">
+                <p><strong className="font-semibold text-foreground">Impeccable → Design.</strong> Gives the agent stronger visual direction.</p>
+                <p><strong className="font-semibold text-foreground">21st → Components.</strong> Gives it better building blocks.</p>
+                <p><strong className="font-semibold text-foreground">Vercel Guidelines → Review.</strong> Checks what the agent built.</p>
+                <p><strong className="font-semibold text-foreground">Chrome DevTools → Eyes.</strong> Lets the agent inspect and use the real website.</p>
+              </div>
+            </section>
+
+            <section>
+              <h2 className="mb-1 text-lg font-semibold tracking-tight">1. Impeccable</h2>
+              <p className="mb-4 text-sm font-medium text-muted-foreground">Best for better design direction</p>
+              <div className="space-y-4 text-muted-foreground">
+                <p>Impeccable is a design skill and toolkit for AI coding agents. It gives the agent a more precise vocabulary for typography, colour, spacing, layout, hierarchy, motion, and overall visual direction.</p>
+                <p>Install it near the beginning of a project so it can establish the design context. Use it again near the end for a final polish pass.</p>
+              </div>
+
+              <h3 className="mb-3 mt-6 font-semibold text-foreground">Install and initialise</h3>
+              <PromptBlock>{`npx impeccable install
+
+/impeccable init`}</PromptBlock>
+
+              <h3 className="mb-3 mt-6 font-semibold text-foreground">Polish an existing interface</h3>
+              <PromptBlock>{`/impeccable polish`}</PromptBlock>
+
+              <p className="mt-4 text-muted-foreground">Impeccable also provides commands for typography, simplification, auditing, and other focused improvements. Use the specific command that matches the problem instead of asking for a general redesign.</p>
+
+              <div className="mt-5">
+                <EpisodeResourceLink href="https://impeccable.style/" title="Impeccable" context="Installation and documentation" />
+              </div>
+            </section>
+
+            <section>
+              <h2 className="mb-1 text-lg font-semibold tracking-tight">2. 21st</h2>
+              <p className="mb-4 text-sm font-medium text-muted-foreground">Best for high-quality components</p>
+              <div className="space-y-4 text-muted-foreground">
+                <p>21st connects your coding agent to a large catalog of React components. Before generating another hero, pricing section, form, navbar, or animation from scratch, the agent can search for an existing component and inspect the real code.</p>
+                <p>The current workflow combines the 21st CLI and MCP. Setup varies by coding agent, so use the command generated on the official MCP page instead of copying an old Magic MCP configuration.</p>
+              </div>
+
+              <h3 className="mb-3 mt-6 font-semibold text-foreground">Ask your agent</h3>
+              <PromptBlock>{`Find a clean pricing section that fits the visual style of this website.
+
+Show me the best options before installing anything.`}</PromptBlock>
+
+              <h3 className="mb-3 mt-6 font-semibold text-foreground">Search from the CLI</h3>
+              <PromptBlock>{`21st search "pricing table"
+
+21st generate "a pricing table" --variants 3`}</PromptBlock>
+
+              <div className="mt-5 space-y-1">
+                <EpisodeResourceLink href="https://21st.dev/" title="21st" context="Component catalog" />
+                <EpisodeResourceLink href="https://21st.dev/mcp" title="21st MCP setup" context="Instructions for your coding agent" />
+              </div>
+            </section>
+
+            <section>
+              <h2 className="mb-1 text-lg font-semibold tracking-tight">3. Vercel Web Design Guidelines</h2>
+              <p className="mb-4 text-sm font-medium text-muted-foreground">Best for reviewing the finished UI</p>
+              <div className="space-y-4 text-muted-foreground">
+                <p>This official Vercel agent skill acts like a reviewer. It checks interface code for accessibility, forms, typography, images, navigation, dark mode, touch interactions, animation, performance, and usability.</p>
+                <p>Use it after the main design is built. Ask it to fix important issues without changing the direction you already chose.</p>
+              </div>
+
+              <h3 className="mb-3 mt-6 font-semibold text-foreground">Install only the review skill</h3>
+              <PromptBlock>{`npx skills add https://github.com/vercel-labs/agent-skills --skill web-design-guidelines`}</PromptBlock>
+
+              <h3 className="mb-3 mt-6 font-semibold text-foreground">Run a focused review</h3>
+              <PromptBlock>{`Audit this landing page for design, accessibility, and UX issues.
+
+Fix the important issues without changing the overall visual direction.`}</PromptBlock>
+
+              <div className="mt-5 space-y-1">
+                <EpisodeResourceLink href="https://www.skills.sh/vercel-labs/agent-skills/web-design-guidelines" title="Web Design Guidelines" context="Skill page" />
+                <EpisodeResourceLink href="https://github.com/vercel-labs/agent-skills" title="Vercel agent skills" context="Official repository" />
+              </div>
+            </section>
+
+            <section>
+              <h2 className="mb-1 text-lg font-semibold tracking-tight">4. Chrome DevTools MCP</h2>
+              <p className="mb-4 text-sm font-medium text-muted-foreground">Best for inspecting the real website</p>
+              <div className="space-y-4 text-muted-foreground">
+                <p>Source code does not show the whole experience. Chrome DevTools MCP lets the agent open the rendered website, click through it, inspect errors and network requests, test interactions, check responsiveness, and measure performance.</p>
+                <p>Use it throughout testing, but especially after the visual design is mostly finished. It gives the agent something extremely useful: eyes.</p>
+              </div>
+
+              <h3 className="mb-3 mt-6 font-semibold text-foreground">Claude Code MCP setup</h3>
+              <PromptBlock>{`claude mcp add chrome-devtools --scope user npx chrome-devtools-mcp@latest`}</PromptBlock>
+
+              <h3 className="mb-3 mt-6 font-semibold text-foreground">Inspect the result</h3>
+              <PromptBlock>{`Open my local website.
+
+Inspect the landing page at desktop and mobile sizes.
+
+Check the layout, interactions, console, and network requests for problems.
+
+Fix the important issues and inspect it again.`}</PromptBlock>
+
+              <div className="mt-5">
+                <EpisodeResourceLink href="https://github.com/ChromeDevTools/chrome-devtools-mcp" title="Chrome DevTools MCP" context="Official repository and setup" />
+              </div>
+            </section>
+
+            <section>
+              <h2 className="mb-4 text-lg font-semibold tracking-tight">The workflow I would use</h2>
+              <div className="space-y-7">
+                <div>
+                  <h3 className="font-semibold text-foreground">1. Set the direction with Impeccable</h3>
+                  <p className="mt-1 text-muted-foreground">Create the design context before the interface grows in five different directions.</p>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-foreground">2. Find components with 21st</h3>
+                  <p className="mt-1 text-muted-foreground">Search for strong building blocks when you need a section instead of generating every component from zero.</p>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-foreground">3. Polish with Impeccable</h3>
+                  <p className="mt-1 text-muted-foreground">Run a focused visual-quality pass once the complete page exists.</p>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-foreground">4. Review with Vercel’s guidelines</h3>
+                  <p className="mt-1 text-muted-foreground">Find accessibility and UX problems without replacing the design.</p>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-foreground">5. Test through Chrome DevTools</h3>
+                  <p className="mt-1 text-muted-foreground">Inspect the real page, fix what is broken, and inspect it again.</p>
+                </div>
+              </div>
+            </section>
+
+            <section className="border-t border-border pt-8">
+              <h2 className="mb-4 text-lg font-semibold tracking-tight">The takeaway</h2>
+              <div className="space-y-4 text-muted-foreground">
+                <p>No single tool will make every interface good. The improvement comes from giving each stage of the work a clear purpose.</p>
+                <p>Set a direction, use better components, review the result, and test the actual website. That workflow is far more useful than repeatedly asking an agent to make the page look better.</p>
+              </div>
+            </section>
+          </div>
+        ) : null}
+
+        {episode.number === 8 ? (
+          <div className="space-y-10 text-[15px] leading-7">
+            <section>
+              <div className="space-y-4 text-muted-foreground">
+                <p>You do not have to choose between Claude Code and Codex.</p>
+                <p>OpenAI has an official Claude Code plugin that lets you use Codex inside the workflow you already have. Codex can review the current code, investigate a bug, try a fix, or continue the whole task in its own thread.</p>
+                <p>Here is the simplest way to set it up and use it.</p>
+              </div>
+            </section>
+
+            <section>
+              <h2 className="mb-4 text-lg font-semibold tracking-tight">What you need</h2>
+              <ul className="space-y-2 pl-5 text-muted-foreground">
+                <li className="list-disc">Claude Code installed</li>
+                <li className="list-disc">Node.js 18.18 or newer</li>
+                <li className="list-disc">A ChatGPT account with Codex access, or an OpenAI API key</li>
+              </ul>
+              <p className="mt-4 text-muted-foreground">The plugin uses your local Codex installation, authentication, repository, and configuration. If Codex already works on this computer, you normally do not need a separate setup.</p>
+            </section>
+
+            <section>
+              <h2 className="mb-4 text-lg font-semibold tracking-tight">1. Install the official plugin</h2>
+              <p className="mb-5 text-muted-foreground">Open Claude Code inside the project where you want to use Codex. Add OpenAI’s marketplace, install the plugin, and reload the available plugins.</p>
+              <PromptBlock>{`/plugin marketplace add openai/codex-plugin-cc
+
+/plugin install codex@openai-codex
+
+/reload-plugins`}</PromptBlock>
+            </section>
+
+            <section>
+              <h2 className="mb-4 text-lg font-semibold tracking-tight">2. Check the Codex setup</h2>
+              <p className="mb-5 text-muted-foreground">Run the setup command inside Claude Code. It checks whether Codex is installed and authenticated. When Codex is missing and npm is available, the plugin can offer to install it.</p>
+              <PromptBlock>{`/codex:setup`}</PromptBlock>
+
+              <p className="mb-3 mt-6 text-muted-foreground">You can also install the Codex CLI yourself:</p>
+              <PromptBlock>{`npm install -g @openai/codex`}</PromptBlock>
+            </section>
+
+            <section>
+              <h2 className="mb-4 text-lg font-semibold tracking-tight">3. Sign in when needed</h2>
+              <p className="mb-5 text-muted-foreground">If you have not used Codex on this computer, start the login flow from Claude Code and sign in with your ChatGPT account or API key.</p>
+              <PromptBlock>{`!codex login`}</PromptBlock>
+              <p className="mt-4 text-muted-foreground">When you already use Codex locally, the plugin normally reuses that authentication.</p>
+            </section>
+
+            <section>
+              <h2 className="mb-4 text-lg font-semibold tracking-tight">Use Codex as a second reviewer</h2>
+              <div className="space-y-4 text-muted-foreground">
+                <p>Let Claude Code complete the work, then ask Codex to review the current changes. A normal review is read-only and will not edit the code.</p>
+                <p>For larger changes, run it in the background so you can continue working.</p>
+              </div>
+              <div className="mt-5">
+                <PromptBlock>{`/codex:review
+
+/codex:review --background
+
+/codex:status
+
+/codex:result`}</PromptBlock>
+              </div>
+            </section>
+
+            <section>
+              <h2 className="mb-4 text-lg font-semibold tracking-tight">Challenge the implementation</h2>
+              <p className="mb-5 text-muted-foreground">Use an adversarial review when you want Codex to question the direction itself: assumptions, tradeoffs, failure cases, and whether a safer or simpler approach exists.</p>
+              <PromptBlock>{`/codex:adversarial-review
+
+/codex:adversarial-review --base main challenge the caching and retry design
+
+/codex:adversarial-review --background look for race conditions`}</PromptBlock>
+              <p className="mt-4 text-muted-foreground">This review is also read-only. It challenges the implementation but does not fix it.</p>
+            </section>
+
+            <section>
+              <h2 className="mb-4 text-lg font-semibold tracking-tight">Give a problem to Codex</h2>
+              <p className="mb-5 text-muted-foreground">The rescue command delegates a task to Codex. Use it to investigate a failure, try a small fix, or continue a previous Codex task.</p>
+              <PromptBlock>{`/codex:rescue investigate why the tests are failing
+
+/codex:rescue fix the failing test with the smallest safe patch
+
+/codex:rescue --background investigate the regression`}</PromptBlock>
+              <p className="mt-4 text-muted-foreground">You can also ask Claude directly: “Ask Codex to investigate this bug.” The plugin can delegate the work for you.</p>
+            </section>
+
+            <section>
+              <h2 className="mb-4 text-lg font-semibold tracking-tight">Hand the conversation over to Codex</h2>
+              <p className="mb-5 text-muted-foreground">When you want to stop delegating individual tasks and continue the full conversation in Codex, transfer the current Claude Code session.</p>
+              <PromptBlock>{`/codex:transfer`}</PromptBlock>
+              <p className="mt-4 text-muted-foreground">The plugin creates a persistent Codex thread and prints a <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-[13px] text-foreground">codex resume</code> command. You can then continue the imported work in Codex.</p>
+            </section>
+
+            <section>
+              <h2 className="mb-4 text-lg font-semibold tracking-tight">Manage background work</h2>
+              <p className="mb-5 text-muted-foreground">Reviews and delegated tasks can take time. These commands let you check progress, read the result, or stop an active job.</p>
+              <PromptBlock>{`/codex:status
+
+/codex:result
+
+/codex:cancel`}</PromptBlock>
+            </section>
+
+            <section>
+              <h2 className="mb-4 text-lg font-semibold tracking-tight">The simple workflow</h2>
+              <div className="space-y-4 text-muted-foreground">
+                <p>Use Claude Code normally.</p>
+                <p>When you want another model to check the work, run a Codex review.</p>
+                <p>When Claude gets stuck, hand the problem to Codex with rescue.</p>
+                <p>When you want Codex to continue the work completely, transfer the session.</p>
+              </div>
+            </section>
+
+            <section className="border-t border-border pt-8">
+              <h2 className="mb-4 text-lg font-semibold tracking-tight">Official plugin</h2>
+              <EpisodeResourceLink href="https://github.com/openai/codex-plugin-cc" title="Codex plugin for Claude Code" context="OpenAI’s official repository" />
+            </section>
+          </div>
+        ) : null}
+
+        {episode.number === 9 ? (
+          <div className="space-y-10 text-[15px] leading-7">
+            <section>
+              <div className="space-y-4 text-muted-foreground">
+                <p>yt-dlp is a free tool that can save videos from YouTube and many other supported websites to your computer.</p>
+                <p>You type a short instruction into Terminal on a Mac or PowerShell on Windows. The tool then finds the video and downloads it for you.</p>
+                <p>The first setup takes a few minutes. After that, you only need the video link.</p>
+              </div>
+            </section>
+
+            <section>
+              <h2 className="mb-4 text-lg font-semibold tracking-tight">What gets installed?</h2>
+              <div className="space-y-4 text-muted-foreground">
+                <p><strong className="font-semibold text-foreground">yt-dlp</strong> downloads the video.</p>
+                <p><strong className="font-semibold text-foreground">FFmpeg</strong> joins the best video and audio together and can create MP3 files.</p>
+                <p><strong className="font-semibold text-foreground">Deno</strong> helps yt-dlp work properly with YouTube.</p>
+                <p>You install these once. You do not need to understand how they work internally.</p>
+              </div>
+            </section>
+
+            <section>
+              <h2 className="mb-4 text-lg font-semibold tracking-tight">Set it up on a Mac</h2>
+              <div className="space-y-4 text-muted-foreground">
+                <p>Press <strong className="font-semibold text-foreground">Command + Space</strong>, type <strong className="font-semibold text-foreground">Terminal</strong>, and open it.</p>
+                <p>Copy the command below, paste it into Terminal, and press Return:</p>
+              </div>
+              <div className="mt-5">
+                <PromptBlock>{`brew install yt-dlp ffmpeg deno`}</PromptBlock>
+              </div>
+              <p className="mt-4 text-muted-foreground">Wait until the command finishes. If your Mac says <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-[13px] text-foreground">brew: command not found</code>, install Homebrew from its official website first, then run the command again.</p>
+              <div className="mt-5">
+                <EpisodeResourceLink href="https://brew.sh/" title="Install Homebrew" context="Only needed when brew is not available" />
+              </div>
+            </section>
+
+            <section>
+              <h2 className="mb-4 text-lg font-semibold tracking-tight">Set it up on Windows</h2>
+              <div className="space-y-4 text-muted-foreground">
+                <p>Open the Start menu, type <strong className="font-semibold text-foreground">PowerShell</strong>, and open it.</p>
+                <p>Copy and run these three commands one at a time. Press Enter after each command and wait for it to finish before running the next one.</p>
+              </div>
+              <div className="mt-5">
+                <PromptBlock>{`winget install yt-dlp
+
+winget install Gyan.FFmpeg
+
+winget install DenoLand.Deno`}</PromptBlock>
+              </div>
+            </section>
+
+            <section>
+              <h2 className="mb-4 text-lg font-semibold tracking-tight">Download your first video</h2>
+              <div className="space-y-4 text-muted-foreground">
+                <p>Open the video in your browser and copy its web address.</p>
+                <p>Replace <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-[13px] text-foreground">VIDEO_URL</code> in the command below with that address. Keep the quotation marks.</p>
+              </div>
+
+              <h3 className="mb-3 mt-6 font-semibold text-foreground">Mac — save it in Downloads</h3>
+              <PromptBlock>{`yt-dlp -P ~/Downloads "VIDEO_URL"`}</PromptBlock>
+
+              <h3 className="mb-3 mt-6 font-semibold text-foreground">Windows — save it in Downloads</h3>
+              <PromptBlock>{`yt-dlp -P "$HOME/Downloads" "VIDEO_URL"`}</PromptBlock>
+
+              <p className="mt-4 text-muted-foreground">Press Return or Enter. yt-dlp will download the best quality it can find and place the finished file in your Downloads folder.</p>
+            </section>
+
+            <section>
+              <h2 className="mb-4 text-lg font-semibold tracking-tight">Download a playlist</h2>
+              <p className="mb-5 text-muted-foreground">Paste a playlist address instead of a single video address. yt-dlp will try to download every video in that playlist.</p>
+
+              <h3 className="mb-3 font-semibold text-foreground">Mac</h3>
+              <PromptBlock>{`yt-dlp -P ~/Downloads "PLAYLIST_URL"`}</PromptBlock>
+
+              <h3 className="mb-3 mt-6 font-semibold text-foreground">Windows</h3>
+              <PromptBlock>{`yt-dlp -P "$HOME/Downloads" "PLAYLIST_URL"`}</PromptBlock>
+
+              <p className="mt-4 text-muted-foreground">Large playlists can take a long time and use a lot of storage, so check the playlist before starting.</p>
+            </section>
+
+            <section>
+              <h2 className="mb-4 text-lg font-semibold tracking-tight">Download only the audio</h2>
+              <p className="mb-5 text-muted-foreground">Use this when you want an MP3 file instead of a video.</p>
+
+              <h3 className="mb-3 font-semibold text-foreground">Mac</h3>
+              <PromptBlock>{`yt-dlp -P ~/Downloads -x --audio-format mp3 "VIDEO_URL"`}</PromptBlock>
+
+              <h3 className="mb-3 mt-6 font-semibold text-foreground">Windows</h3>
+              <PromptBlock>{`yt-dlp -P "$HOME/Downloads" -x --audio-format mp3 "VIDEO_URL"`}</PromptBlock>
+            </section>
+
+            <section>
+              <h2 className="mb-4 text-lg font-semibold tracking-tight">Use it with Claude Code</h2>
+              <p className="mb-5 text-muted-foreground">If Claude Code is already open on your computer, you can describe what you want in normal language. Claude can prepare the command and ask for permission before running it.</p>
+              <PromptBlock>{`Download this video using yt-dlp and save it in my Downloads folder.
+
+VIDEO_URL`}</PromptBlock>
+
+              <div className="mt-6">
+                <PromptBlock>{`Download this entire playlist using yt-dlp.
+
+Save it in a new folder inside my Downloads folder.
+
+PLAYLIST_URL`}</PromptBlock>
+              </div>
+            </section>
+
+            <section>
+              <h2 className="mb-4 text-lg font-semibold tracking-tight">If it stops working</h2>
+              <p className="mb-5 text-muted-foreground">Websites change over time, so an older version of yt-dlp may stop working. Updating it often fixes the problem.</p>
+
+              <h3 className="mb-3 font-semibold text-foreground">Mac</h3>
+              <PromptBlock>{`brew upgrade yt-dlp`}</PromptBlock>
+
+              <h3 className="mb-3 mt-6 font-semibold text-foreground">Windows</h3>
+              <PromptBlock>{`winget upgrade yt-dlp`}</PromptBlock>
+            </section>
+
+            <section>
+              <h2 className="mb-4 text-lg font-semibold tracking-tight">Remember these four steps</h2>
+              <div className="space-y-4 text-muted-foreground">
+                <p><strong className="font-semibold text-foreground">1.</strong> Install the three tools once.</p>
+                <p><strong className="font-semibold text-foreground">2.</strong> Copy the video address.</p>
+                <p><strong className="font-semibold text-foreground">3.</strong> Put that address where the command says <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-[13px] text-foreground">VIDEO_URL</code>.</p>
+                <p><strong className="font-semibold text-foreground">4.</strong> Run the command and look in your Downloads folder.</p>
+              </div>
+            </section>
+
+            <section className="border-t border-border pt-8">
+              <p className="text-sm leading-6 text-muted-foreground">Only download content you own, content that is licensed for download, or content you have permission to save. Follow the website&apos;s terms and the laws that apply to you.</p>
+              <div className="mt-5 space-y-1">
+                <EpisodeResourceLink href="https://github.com/yt-dlp/yt-dlp" title="yt-dlp" context="Official repository and documentation" />
+                <EpisodeResourceLink href="https://github.com/yt-dlp/yt-dlp/wiki/EJS" title="YouTube JavaScript support" context="Official yt-dlp guide" />
+              </div>
+            </section>
+          </div>
+        ) : null}
+
+        {episode.number === 10 ? (
+          <div className="text-[15px] leading-7">
+            <div className="space-y-4 text-muted-foreground">
+              <p>App Review does not need to be stressful. The goal is simple: Apple should be able to install, understand, test, and review your app without running into avoidable problems.</p>
+              <p>Work through this checklist before you submit. Your progress stays on this device, so you can come back whenever you need.</p>
+            </div>
+            <AppStoreSubmissionChecklist />
+            <section className="mt-12 border-t border-border pt-8">
+              <p className="text-sm leading-6 text-muted-foreground">This is a practical launch checklist, not legal advice. Apple&apos;s requirements can change, so always check the latest official guidance before submitting.</p>
+              <p className="mt-3 text-xs text-muted-foreground">Last checked: August 2026</p>
+              <div className="mt-5 space-y-1">
+                <EpisodeResourceLink href="https://developer.apple.com/app-store/review/guidelines/" title="App Review Guidelines" context="Apple&apos;s official requirements" />
+                <EpisodeResourceLink href="https://developer.apple.com/help/app-store-connect/manage-app-information/overview-of-app-privacy-details/" title="App Privacy details" context="App Store Connect Help" />
+                <EpisodeResourceLink href="https://developer.apple.com/help/app-store-connect/manage-account-information/provide-app-access/" title="Provide App Review access" context="Demo accounts and review notes" />
+                <EpisodeResourceLink href="https://developer.apple.com/help/app-store-connect/manage-compliance-information/overview-of-export-compliance/" title="Export compliance" context="App Store Connect Help" />
+                <EpisodeResourceLink href="https://developer.apple.com/help/app-store-connect/manage-in-app-purchases/overview-for-configuring-in-app-purchases/" title="In-App Purchases" context="App Store Connect Help" />
+              </div>
+            </section>
+          </div>
+        ) : null}
+
+        {episode.number === 11 ? (
+          <div className="space-y-10 text-[15px] leading-7">
+            <section>
+              <div className="space-y-4 text-muted-foreground">
+                <p>Anthropic has begun adding machine-readable watermarks to text from supported Claude models. They are not visible tags or hidden characters: they are carried in subtle word-choice patterns in the text itself.</p>
+                <p>Watermarks Remover is an open-source project by Guillaume Meyer. Its Claude skill connects to a local service on your computer and can inspect or rewrite content that you own or are authorised to process.</p>
+              </div>
+            </section>
+
+            <section>
+              <h2 className="mb-4 text-lg font-semibold tracking-tight">What you need</h2>
+              <div className="space-y-4 text-muted-foreground">
+                <p>This is more than a single <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-[13px] text-foreground">SKILL.md</code> file. The skill is a client for Watermarks Remover&apos;s local service.</p>
+                <p>You need the Watermarks Remover repository, the <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-[13px] text-foreground">remove-ai-marks</code> skill, and the service running locally. Python 3.10 or newer is the simplest setup.</p>
+              </div>
+            </section>
+
+            <section>
+              <h2 className="mb-4 text-lg font-semibold tracking-tight">1. Download the project</h2>
+              <p className="mb-5 text-muted-foreground">Clone the repository in Terminal, or download it as a ZIP from GitHub and open the extracted folder.</p>
+              <PromptBlock>{`git clone https://github.com/guillaumemeyer/watermarks-remover.git
+cd watermarks-remover`}</PromptBlock>
+            </section>
+
+            <section>
+              <h2 className="mb-4 text-lg font-semibold tracking-tight">2. Find the Claude skill</h2>
+              <div className="space-y-4 text-muted-foreground">
+                <p>Inside the project, open <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-[13px] text-foreground">skills/remove-ai-marks/</code>. It contains the skill instructions and its supporting references.</p>
+                <p>The skill is called <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-[13px] text-foreground">remove-ai-marks</code>. The project also documents the older <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-[13px] text-foreground">remove-claude-marks</code> alias.</p>
+              </div>
+              <PromptBlock>{`skills/
+└── remove-ai-marks/
+    ├── SKILL.md
+    └── references/`}</PromptBlock>
+            </section>
+
+            <section>
+              <h2 className="mb-4 text-lg font-semibold tracking-tight">3. Start the local service</h2>
+              <div className="space-y-4 text-muted-foreground">
+                <p>From the repository folder, start the service. It listens on your own computer at <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-[13px] text-foreground">http://127.0.0.1:8765</code> by default.</p>
+              </div>
+              <div className="mt-5"><PromptBlock>{`make serve`}</PromptBlock></div>
+              <p className="mb-5 mt-5 text-muted-foreground">Or run the server directly:</p>
+              <PromptBlock>{`python3 service/scripts/server.py --host 127.0.0.1 --port 8765`}</PromptBlock>
+              <p className="mb-5 mt-5 text-muted-foreground">Leave that Terminal window open. In a second window, check that it is healthy:</p>
+              <PromptBlock>{`curl http://127.0.0.1:8765/health`}</PromptBlock>
+            </section>
+
+            <section>
+              <h2 className="mb-4 text-lg font-semibold tracking-tight">4. Package and upload the skill</h2>
+              <div className="space-y-4 text-muted-foreground">
+                <p>Claude expects a ZIP that contains the skill folder. Do not place <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-[13px] text-foreground">SKILL.md</code> directly at the root of the ZIP.</p>
+              </div>
+              <div className="mt-5"><PromptBlock>{`remove-ai-marks.zip
+└── remove-ai-marks/
+    ├── SKILL.md
+    └── references/`}</PromptBlock></div>
+              <p className="mt-5 text-muted-foreground">In Claude, go to <strong className="font-semibold text-foreground">Customize → Skills</strong>, choose <strong className="font-semibold text-foreground">Create skill → Upload a skill</strong>, upload the ZIP, and make sure it is enabled.</p>
+            </section>
+
+            <section>
+              <h2 className="mb-4 text-lg font-semibold tracking-tight">5. Use it</h2>
+              <p className="mb-5 text-muted-foreground">Open a Claude conversation, invoke the skill, then provide the text or file you want to inspect or process.</p>
+              <PromptBlock>{`/remove-ai-marks`}</PromptBlock>
+              <p className="mt-5 text-muted-foreground">The project can work with invisible Unicode characters, statistical text patterns, C2PA provenance, EXIF/XMP metadata, and provenance data in supported documents and media. For statistical text watermarks, it uses rewriting to change the word-choice patterns that may carry the mark.</p>
+            </section>
+
+            <section>
+              <h2 className="mb-4 text-lg font-semibold tracking-tight">What this can and cannot confirm</h2>
+              <div className="space-y-4 text-muted-foreground">
+                <p>Copying and pasting Claude text preserves its wording, so a statistical watermark may travel with it. Light edits may leave enough of the pattern detectable; a substantial rewrite can disrupt that pattern.</p>
+                <p>That does not guarantee removal. Claude&apos;s official detector and detection key are not public, so a third-party tool cannot certify that text will not be detected by a future official detector. Treat rewriting as a best-effort process and review the result carefully.</p>
+              </div>
+            </section>
+
+            <section className="border-t border-border pt-8">
+              <p className="text-sm leading-6 text-muted-foreground">Only process content you own or are authorised to process. Do not use provenance-removal tools to misrepresent AI-assisted work where disclosure is required.</p>
+              <div className="mt-5 space-y-1">
+                <EpisodeResourceLink href="https://github.com/guillaumemeyer/watermarks-remover" title="Watermarks Remover" context="Project repository and setup files" />
+              </div>
+            </section>
+          </div>
+        ) : null}
       </article>
     </main>
   );
@@ -996,6 +1508,18 @@ function LegalSection({ number, title, description, preparation, checks, prompt 
         {checks.map((item) => <li key={item} className="list-disc">{item}</li>)}
       </ul>
     </section>
+  );
+}
+
+function EpisodeResourceLink({ href, title, context }: { href: string; title: string; context: string }) {
+  return (
+    <a href={href} target="_blank" rel="noopener noreferrer" className="group -mx-3 flex items-center justify-between gap-5 rounded-xl px-3 py-3 transition-colors hover:bg-muted/60">
+      <div className="flex min-w-0 items-baseline gap-2.5">
+        <span className="shrink-0 text-sm font-medium text-foreground">{title}</span>
+        <span className="truncate text-xs text-muted-foreground">{context}</span>
+      </div>
+      <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-foreground" />
+    </a>
   );
 }
 

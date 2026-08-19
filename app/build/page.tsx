@@ -46,13 +46,6 @@ export default async function BuildHome() {
               </div>
             </Link>
           ))}
-          <div className="-mx-4 grid grid-cols-[82px_minmax(0,1fr)] items-center gap-3 rounded-xl px-4 py-5 text-muted-foreground sm:grid-cols-[92px_minmax(0,1fr)] sm:gap-5">
-            <span className="flex items-center gap-2.5 text-sm font-medium">
-              <Clapperboard className="h-[18px] w-[18px]" strokeWidth={1.8} />
-              Ep. 07
-            </span>
-            <p className="text-sm">Coming soon</p>
-          </div>
         </section>
 
         <section className="pb-12 pt-16 sm:pb-14 sm:pt-20">
