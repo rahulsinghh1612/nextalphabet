@@ -115,4 +115,12 @@ export const buildEpisodes: BuildEpisode[] = [
     date: "Episode 11",
     published: true,
   },
+  {
+    number: 12,
+    slug: "12",
+    title: "3 Things to Set Up After Buying a Domain",
+    description: "Separate your website, app, email, and search setup properly from the start.",
+    date: "Episode 12",
+    published: true,
+  },
 ];
