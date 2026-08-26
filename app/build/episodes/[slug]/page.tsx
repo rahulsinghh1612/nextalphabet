@@ -1459,6 +1459,42 @@ cd watermarks-remover`}</PromptBlock>
             </section>
 
             <section>
+              <h2 className="mb-3 text-lg font-semibold tracking-tight">Want your coding agent to guide you?</h2>
+              <p className="mb-5 text-muted-foreground">Replace the details below, copy the prompt, and work through the setup one step at a time.</p>
+              <PromptBlock>{`Help me set up my new domain correctly.
+
+My domain:
+[YOUR DOMAIN]
+
+My website is hosted on:
+[WEBSITE HOST]
+
+My app is hosted on:
+[APP HOST]
+
+My email provider is:
+[EMAIL PROVIDER]
+
+Guide me through these three tasks:
+
+1. Connect my main domain to my public website and use app.[YOUR DOMAIN] for my product.
+
+2. Set up notifications.[YOUR DOMAIN] for important app emails and updates.[YOUR DOMAIN] for marketing emails. Help me configure SPF, DKIM, and DMARC correctly.
+
+3. Check or create my sitemap, connect the domain to Google Search Console, and submit the sitemap.
+
+Before suggesting changes, inspect any relevant project configuration you can access.
+
+Guide me through one step at a time and wait for me to confirm before continuing.
+
+Never guess DNS records. Tell me exactly where to find the values supplied by my hosting or email provider.
+
+Do not overwrite an existing DNS or DMARC record without first explaining what it currently does and asking for confirmation.
+
+If you cannot access my domain provider or another service, tell me exactly where to click and what information to copy back to you.`}</PromptBlock>
+            </section>
+
+            <section>
               <p className="mb-3 text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">Step 1 of 3</p>
               <h2 className="mb-4 text-lg font-semibold tracking-tight">Separate your main domain and subdomain</h2>
               <p className="text-muted-foreground">Use your main domain for the website and a subdomain for the actual app. This keeps your public website and product separate.</p>
