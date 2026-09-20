@@ -1,5 +1,6 @@
 export type BuildEpisode = {
   number: number;
+  label?: string;
   slug: string;
   legacySlug?: string;
   reelNumber?: number;
@@ -121,6 +122,15 @@ export const buildEpisodes: BuildEpisode[] = [
     title: "3 Things to Set Up After Buying a Domain",
     description: "Separate your website, app, email, and search setup properly from the start.",
     date: "Episode 12",
+    published: true,
+  },
+  {
+    number: 13,
+    label: "Scrapling",
+    slug: "scrapling",
+    title: "Set Up Scrapling With Your AI Agent",
+    description: "Connect Scrapling to Codex or Claude Code through MCP.",
+    date: "Scrapling",
     published: true,
   },
 ];

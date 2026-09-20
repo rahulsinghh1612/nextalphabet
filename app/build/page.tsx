@@ -36,7 +36,7 @@ export default async function BuildHome() {
             >
               <span className="flex items-center gap-2.5 text-sm font-medium leading-6 text-muted-foreground">
                 <Clapperboard className="h-[18px] w-[18px] text-foreground" strokeWidth={1.8} />
-                Ep. {String(episode.number).padStart(2, "0")}
+                {episode.label ?? `Ep. ${String(episode.number).padStart(2, "0")}`}
               </span>
               <div className="min-w-0">
                 <h2 className="text-[15px] font-medium leading-6 tracking-tight">{episode.title}</h2>

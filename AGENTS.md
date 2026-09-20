@@ -16,3 +16,9 @@ Use the existing Build episode pages as the visual and editorial reference for f
 - Keep caveats accurate but visually and editorially secondary unless they are safety-critical.
 - Reuse the established episode typography, spacing, icon weight, muted colors, and content width.
 - When uncertain, choose the quieter and more readable option.
+
+## Copyable setup prompts
+
+- When a setup prompt mentions a tool, package, repository, MCP server, plugin, or integration, include the relevant official source URLs inside the copyable prompt itself.
+- Do not rely on resource links elsewhere on the page to identify what the prompt should install or configure.
+- Prefer the official repository and the most relevant official setup documentation. Keep the surrounding explanation short and tidy.
