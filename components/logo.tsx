@@ -1,6 +1,8 @@
 interface LogoProps {
   showText?: boolean;
   size?: "sm" | "md";
+  /** "light" for dark backgrounds, "muted" for a quiet sign-off. */
+  tone?: "default" | "light" | "muted";
   className?: string;
 }
 
@@ -25,13 +27,26 @@ function BlocksIcon({ size = "md" }: { size?: "sm" | "md" }) {
   );
 }
 
-export function Logo({ showText = true, size = "md", className = "" }: LogoProps) {
+export function Logo({
+  showText = true,
+  size = "md",
+  tone = "default",
+  className = "",
+}: LogoProps) {
   const textClass = size === "sm"
     ? "text-sm font-semibold tracking-tight"
     : "text-lg font-semibold tracking-tight";
 
   return (
-    <span className={`inline-flex items-center gap-2 text-foreground ${className}`}>
+    <span
+      className={`inline-flex items-center gap-2 ${
+        {
+          light: "text-white",
+          muted: "text-muted-foreground",
+          default: "text-foreground",
+        }[tone]
+      } ${className}`}
+    >
       <BlocksIcon size={size} />
       {showText && <span className={textClass}>Next Alphabet</span>}
     </span>

@@ -51,7 +51,7 @@ export default async function BuildHome() {
         <section className="pb-12 pt-16 sm:pb-14 sm:pt-20">
           <div className="mb-6 flex items-baseline justify-between">
             <h2 className="text-sm font-semibold">Products I&apos;ve built</h2>
-            <a href="https://www.nextalphabet.com/products" className="text-xs text-muted-foreground transition-colors hover:text-foreground">
+            <a href="https://www.nextalphabet.com" className="text-xs text-muted-foreground transition-colors hover:text-foreground">
               <span className="inline-flex items-center gap-1.5">View all <ChevronRight className="h-3.5 w-3.5" /></span>
             </a>
           </div>
