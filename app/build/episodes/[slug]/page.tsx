@@ -9,6 +9,7 @@ import { CopyPrompt } from "@/components/copy-prompt";
 import { BuildIntro } from "@/components/build-intro";
 import { AppStoreSubmissionChecklist } from "@/components/app-store-submission-checklist";
 import { DomainSetupChecklist } from "@/components/domain-setup-checklist";
+import { DesignSetupChecklist } from "@/components/design-setup-checklist";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
@@ -945,148 +946,167 @@ Mark uncertain answers with [VERIFY].`}
           <div className="space-y-10 text-[15px] leading-7">
             <section>
               <div className="space-y-4 text-muted-foreground">
-                <p>AI coding agents are already very good at building websites. But without the right context and tools, the result can still feel generic.</p>
-                <p>The answer is not another prompt asking the agent to “make it look better.” Give it a better workflow for design direction, components, review, and testing.</p>
-                <p>These are the four tools I would add.</p>
+                <p>If your vibe-coded website looks like every other AI-built site, don&apos;t redesign it yourself.</p>
+                <p>Give your coding agent these three things first: a design system to follow, a tool that finds and fixes AI slop, and a way to see the real page.</p>
               </div>
             </section>
 
             <section>
-              <h2 className="mb-4 text-lg font-semibold tracking-tight">The simple mental model</h2>
+              <h2 className="mb-3 text-lg font-semibold tracking-tight">Want your coding agent to guide you?</h2>
+              <p className="mb-5 text-muted-foreground">Replace the details below, copy the prompt, and work through the setup one step at a time.</p>
+              <PromptBlock>{`Help me make my website look designed instead of vibe-coded.
+
+A website whose style I like:
+[A SITE, FOR EXAMPLE NOTION OR APPLE]
+
+My coding agent:
+[CLAUDE CODE, CODEX, OR CURSOR]
+
+Guide me through these three tasks:
+
+1. Add a DESIGN.md file. Find a ready-made one for the site I like on https://getdesign.md (from https://github.com/VoltAgent/awesome-design-md), save it as DESIGN.md in the project root, and adapt the name, logo, and brand colours so it describes my product, not theirs. Then follow DESIGN.md for every design change.
+
+2. Install Impeccable from https://impeccable.style (repository: https://github.com/pbakaus/impeccable). Run /impeccable init, then /impeccable audit to find AI slop such as purple gradients, glowing effects, and emoji decoration, and fix what it finds with /impeccable polish.
+
+3. Connect Chrome DevTools MCP using the official setup for my agent: https://github.com/ChromeDevTools/chrome-devtools-mcp/blob/main/docs/client-configurations.md. Then open my website in a real browser, check it at desktop and mobile sizes, take screenshots, fix anything broken, and check again.
+
+Before suggesting changes, inspect my project so you understand how it is built.
+
+Guide me through one step at a time and wait for me to confirm before continuing.
+
+Do not overwrite an existing DESIGN.md, configuration file, or design without explaining what it currently does and asking me first.`}</PromptBlock>
+            </section>
+
+            <section>
+              <p className="mb-3 text-xs font-medium tracking-[0.04em] text-muted-foreground">Step 1 of 3</p>
+              <h2 className="mb-4 text-lg font-semibold tracking-tight">Give your agent a DESIGN.md file</h2>
               <div className="space-y-4 text-muted-foreground">
-                <p><strong className="font-semibold text-foreground">Impeccable → Design.</strong> Gives the agent stronger visual direction.</p>
-                <p><strong className="font-semibold text-foreground">21st → Components.</strong> Gives it better building blocks.</p>
-                <p><strong className="font-semibold text-foreground">Vercel Guidelines → Review.</strong> Checks what the agent built.</p>
-                <p><strong className="font-semibold text-foreground">Chrome DevTools → Eyes.</strong> Lets the agent inspect and use the real website.</p>
+                <p>A DESIGN.md file is a Markdown file in your project that describes your design system: colours, fonts, spacing, components, and the overall feel. Your agent reads it before building, so it stops guessing and stops falling back on generic defaults.</p>
+                <p>You don&apos;t have to write one from scratch. getdesign.md has ready-made DESIGN.md files for more than 80 well-known websites, including Apple, Notion, Airbnb, and Spotify.</p>
+              </div>
+
+              <h3 className="mb-3 mt-7 font-semibold text-foreground">How to set it up</h3>
+              <ol className="space-y-2 pl-5 text-muted-foreground">
+                <li className="list-decimal pl-1">Open getdesign.md and pick a site whose style you like.</li>
+                <li className="list-decimal pl-1">Copy its DESIGN.md file.</li>
+                <li className="list-decimal pl-1">Save it as <InlineCode>DESIGN.md</InlineCode> in the root of your project.</li>
+                <li className="list-decimal pl-1">Ask your agent to follow it.</li>
+              </ol>
+
+              <h3 className="mb-3 mt-7 font-semibold text-foreground">Ask your agent</h3>
+              <PromptBlock>{`Read DESIGN.md in the project root and follow it for every design change.
+
+First, adapt it to my product: replace the brand name, logo, and brand colours with mine, and keep the typography, spacing, and component rules.
+
+Then restyle the homepage to match it.`}</PromptBlock>
+
+              <SetupWarning>Use it as a starting point, not a copy. Keep the structure and make the brand your own.</SetupWarning>
+
+              <div className="mt-5 space-y-1">
+                <EpisodeResourceLink href="https://getdesign.md/" title="getdesign.md" context="Ready-made DESIGN.md files" />
+                <EpisodeResourceLink href="https://github.com/VoltAgent/awesome-design-md" title="awesome-design-md" context="The open-source collection behind it" />
               </div>
             </section>
 
             <section>
-              <h2 className="mb-1 text-lg font-semibold tracking-tight">1. Impeccable</h2>
-              <p className="mb-4 text-sm font-medium text-muted-foreground">Best for better design direction</p>
+              <p className="mb-3 text-xs font-medium tracking-[0.04em] text-muted-foreground">Step 2 of 3</p>
+              <h2 className="mb-4 text-lg font-semibold tracking-tight">Run Impeccable to remove the AI slop</h2>
               <div className="space-y-4 text-muted-foreground">
-                <p>Impeccable is a design skill and toolkit for AI coding agents. It gives the agent a more precise vocabulary for typography, colour, spacing, layout, hierarchy, motion, and overall visual direction.</p>
-                <p>Install it near the beginning of a project so it can establish the design context. Use it again near the end for a final polish pass.</p>
+                <p>Impeccable is a design skill for AI coding agents. Its detector runs 59 checks for the defaults agents tend to produce, like purple gradients, glowing effects, and emoji decoration, and its commands fix what it finds.</p>
+                <p>It works with Claude Code, Codex, Cursor, GitHub Copilot, Gemini CLI, and other agents.</p>
               </div>
 
-              <h3 className="mb-3 mt-6 font-semibold text-foreground">Install and initialise</h3>
-              <PromptBlock>{`npx impeccable install
+              <h3 className="mb-3 mt-7 font-semibold text-foreground">Install</h3>
+              <PromptBlock>{`npx impeccable install`}</PromptBlock>
+              <p className="mt-4 text-muted-foreground">In Claude Code you can also install it as a plugin: run <InlineCode>/plugin marketplace add pbakaus/impeccable</InlineCode>, then open <InlineCode>/plugin</InlineCode> and install Impeccable.</p>
 
-/impeccable init`}</PromptBlock>
+              <h3 className="mb-3 mt-7 font-semibold text-foreground">Set it up, find the slop, fix it</h3>
+              <PromptBlock>{`/impeccable init
 
-              <h3 className="mb-3 mt-6 font-semibold text-foreground">Polish an existing interface</h3>
-              <PromptBlock>{`/impeccable polish`}</PromptBlock>
+/impeccable audit
 
-              <p className="mt-4 text-muted-foreground">Impeccable also provides commands for typography, simplification, auditing, and other focused improvements. Use the specific command that matches the problem instead of asking for a general redesign.</p>
+/impeccable polish`}</PromptBlock>
+              <p className="mt-4 text-muted-foreground">Run <InlineCode>init</InlineCode> once so it learns your project. Run <InlineCode>audit</InlineCode> to see what looks generated, then <InlineCode>polish</InlineCode> for a final quality pass. For a specific problem, use the matching command, such as <InlineCode>typeset</InlineCode>, <InlineCode>layout</InlineCode>, or <InlineCode>quieter</InlineCode>, instead of asking for a general redesign.</p>
 
               <div className="mt-5">
-                <EpisodeResourceLink href="https://impeccable.style/" title="Impeccable" context="Installation and documentation" />
+                <EpisodeResourceLink href="https://impeccable.style/" title="Impeccable" context="Installation and all commands" />
               </div>
             </section>
 
             <section>
-              <h2 className="mb-1 text-lg font-semibold tracking-tight">2. 21st</h2>
-              <p className="mb-4 text-sm font-medium text-muted-foreground">Best for high-quality components</p>
+              <p className="mb-3 text-xs font-medium tracking-[0.04em] text-muted-foreground">Step 3 of 3</p>
+              <h2 className="mb-4 text-lg font-semibold tracking-tight">Connect Chrome DevTools MCP so your agent can see</h2>
               <div className="space-y-4 text-muted-foreground">
-                <p>21st connects your coding agent to a large catalog of React components. Before generating another hero, pricing section, form, navbar, or animation from scratch, the agent can search for an existing component and inspect the real code.</p>
-                <p>The current workflow combines the 21st CLI and MCP. Setup varies by coding agent, so use the command generated on the official MCP page instead of copying an old Magic MCP configuration.</p>
+                <p>Your agent normally only reads code. It never sees what the page actually looks like. Chrome DevTools MCP lets it open your website in a real Chrome browser, take screenshots, check the console and network, and test the page, so it can find what&apos;s broken and fix it.</p>
+                <p>You need Node.js and Chrome installed.</p>
               </div>
 
-              <h3 className="mb-3 mt-6 font-semibold text-foreground">Ask your agent</h3>
-              <PromptBlock>{`Find a clean pricing section that fits the visual style of this website.
+              <h3 className="mb-3 mt-7 font-semibold text-foreground">Claude Code</h3>
+              <PromptBlock>{`claude mcp add chrome-devtools --scope user npx chrome-devtools-mcp@latest`}</PromptBlock>
 
-Show me the best options before installing anything.`}</PromptBlock>
+              <h3 className="mb-3 mt-7 font-semibold text-foreground">Codex</h3>
+              <PromptBlock>{`codex mcp add chrome-devtools -- npx chrome-devtools-mcp@latest`}</PromptBlock>
 
-              <h3 className="mb-3 mt-6 font-semibold text-foreground">Search from the CLI</h3>
-              <PromptBlock>{`21st search "pricing table"
+              <h3 className="mb-3 mt-7 font-semibold text-foreground">Cursor</h3>
+              <p className="text-muted-foreground">Open <strong className="font-medium text-foreground">Cursor Settings</strong>, go to <strong className="font-medium text-foreground">MCP</strong>, click <strong className="font-medium text-foreground">New MCP Server</strong>, and paste the standard config from the official repository.</p>
 
-21st generate "a pricing table" --variants 3`}</PromptBlock>
+              <h3 className="mb-3 mt-7 font-semibold text-foreground">Ask your agent</h3>
+              <PromptBlock>{`Open my website in Chrome.
 
+Check the homepage at desktop and mobile sizes and take a screenshot of each.
+
+Look for text that is cut off, layouts that break, and anything that doesn't match DESIGN.md.
+
+Fix what's broken, then check again.`}</PromptBlock>
+
+              <div className="mt-5">
+                <EpisodeResourceLink href="https://github.com/ChromeDevTools/chrome-devtools-mcp" title="Chrome DevTools MCP" context="Official repository and setup for every agent" />
+              </div>
+            </section>
+
+            <section>
+              <h2 className="mb-4 text-lg font-semibold tracking-tight">The order I&apos;d use</h2>
+              <div className="space-y-7">
+                <div>
+                  <h3 className="font-semibold text-foreground">1. Set the direction with DESIGN.md</h3>
+                  <p className="mt-1 text-muted-foreground">Decide how the site should look before the agent changes anything.</p>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-foreground">2. Clean it up with Impeccable</h3>
+                  <p className="mt-1 text-muted-foreground">Remove the generic AI defaults and polish what&apos;s left.</p>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-foreground">3. Check the real page with Chrome DevTools MCP</h3>
+                  <p className="mt-1 text-muted-foreground">Look at it on desktop and mobile, fix what&apos;s broken, and check again.</p>
+                </div>
+              </div>
+            </section>
+
+            <DesignSetupChecklist />
+
+            <section>
+              <h2 className="mb-4 text-lg font-semibold tracking-tight">Two more worth adding</h2>
+              <div className="space-y-6 text-muted-foreground">
+                <div>
+                  <h3 className="mb-2 font-semibold text-foreground">21st for better components</h3>
+                  <p>21st connects your agent to a large catalog of React components, so it can start from a strong hero, pricing section, or navbar instead of generating every section from scratch. Use the setup command from its MCP page for your agent.</p>
+                </div>
+                <div>
+                  <h3 className="mb-2 font-semibold text-foreground">Vercel&apos;s Web Design Guidelines for a final review</h3>
+                  <p>An official Vercel agent skill that reviews your interface for accessibility, forms, typography, navigation, and usability once the design is done.</p>
+                  <div className="mt-3">
+                    <PromptBlock>{`npx skills add https://github.com/vercel-labs/agent-skills --skill web-design-guidelines`}</PromptBlock>
+                  </div>
+                </div>
+              </div>
               <div className="mt-5 space-y-1">
-                <EpisodeResourceLink href="https://21st.dev/" title="21st" context="Component catalog" />
                 <EpisodeResourceLink href="https://21st.dev/mcp" title="21st MCP setup" context="Instructions for your coding agent" />
-              </div>
-            </section>
-
-            <section>
-              <h2 className="mb-1 text-lg font-semibold tracking-tight">3. Vercel Web Design Guidelines</h2>
-              <p className="mb-4 text-sm font-medium text-muted-foreground">Best for reviewing the finished UI</p>
-              <div className="space-y-4 text-muted-foreground">
-                <p>This official Vercel agent skill acts like a reviewer. It checks interface code for accessibility, forms, typography, images, navigation, dark mode, touch interactions, animation, performance, and usability.</p>
-                <p>Use it after the main design is built. Ask it to fix important issues without changing the direction you already chose.</p>
-              </div>
-
-              <h3 className="mb-3 mt-6 font-semibold text-foreground">Install only the review skill</h3>
-              <PromptBlock>{`npx skills add https://github.com/vercel-labs/agent-skills --skill web-design-guidelines`}</PromptBlock>
-
-              <h3 className="mb-3 mt-6 font-semibold text-foreground">Run a focused review</h3>
-              <PromptBlock>{`Audit this landing page for design, accessibility, and UX issues.
-
-Fix the important issues without changing the overall visual direction.`}</PromptBlock>
-
-              <div className="mt-5 space-y-1">
-                <EpisodeResourceLink href="https://www.skills.sh/vercel-labs/agent-skills/web-design-guidelines" title="Web Design Guidelines" context="Skill page" />
                 <EpisodeResourceLink href="https://github.com/vercel-labs/agent-skills" title="Vercel agent skills" context="Official repository" />
               </div>
             </section>
 
-            <section>
-              <h2 className="mb-1 text-lg font-semibold tracking-tight">4. Chrome DevTools MCP</h2>
-              <p className="mb-4 text-sm font-medium text-muted-foreground">Best for inspecting the real website</p>
-              <div className="space-y-4 text-muted-foreground">
-                <p>Source code does not show the whole experience. Chrome DevTools MCP lets the agent open the rendered website, click through it, inspect errors and network requests, test interactions, check responsiveness, and measure performance.</p>
-                <p>Use it throughout testing, but especially after the visual design is mostly finished. It gives the agent something extremely useful: eyes.</p>
-              </div>
-
-              <h3 className="mb-3 mt-6 font-semibold text-foreground">Claude Code MCP setup</h3>
-              <PromptBlock>{`claude mcp add chrome-devtools --scope user npx chrome-devtools-mcp@latest`}</PromptBlock>
-
-              <h3 className="mb-3 mt-6 font-semibold text-foreground">Inspect the result</h3>
-              <PromptBlock>{`Open my local website.
-
-Inspect the landing page at desktop and mobile sizes.
-
-Check the layout, interactions, console, and network requests for problems.
-
-Fix the important issues and inspect it again.`}</PromptBlock>
-
-              <div className="mt-5">
-                <EpisodeResourceLink href="https://github.com/ChromeDevTools/chrome-devtools-mcp" title="Chrome DevTools MCP" context="Official repository and setup" />
-              </div>
-            </section>
-
-            <section>
-              <h2 className="mb-4 text-lg font-semibold tracking-tight">The workflow I would use</h2>
-              <div className="space-y-7">
-                <div>
-                  <h3 className="font-semibold text-foreground">1. Set the direction with Impeccable</h3>
-                  <p className="mt-1 text-muted-foreground">Create the design context before the interface grows in five different directions.</p>
-                </div>
-                <div>
-                  <h3 className="font-semibold text-foreground">2. Find components with 21st</h3>
-                  <p className="mt-1 text-muted-foreground">Search for strong building blocks when you need a section instead of generating every component from zero.</p>
-                </div>
-                <div>
-                  <h3 className="font-semibold text-foreground">3. Polish with Impeccable</h3>
-                  <p className="mt-1 text-muted-foreground">Run a focused visual-quality pass once the complete page exists.</p>
-                </div>
-                <div>
-                  <h3 className="font-semibold text-foreground">4. Review with Vercel’s guidelines</h3>
-                  <p className="mt-1 text-muted-foreground">Find accessibility and UX problems without replacing the design.</p>
-                </div>
-                <div>
-                  <h3 className="font-semibold text-foreground">5. Test through Chrome DevTools</h3>
-                  <p className="mt-1 text-muted-foreground">Inspect the real page, fix what is broken, and inspect it again.</p>
-                </div>
-              </div>
-            </section>
-
             <section className="border-t border-border pt-8">
-              <h2 className="mb-4 text-lg font-semibold tracking-tight">The takeaway</h2>
-              <div className="space-y-4 text-muted-foreground">
-                <p>No single tool will make every interface good. The improvement comes from giving each stage of the work a clear purpose.</p>
-                <p>Set a direction, use better components, review the result, and test the actual website. That workflow is far more useful than repeatedly asking an agent to make the page look better.</p>
-              </div>
+              <p className="text-sm leading-6 text-muted-foreground">With a design system to follow, the slop removed, and the real page checked, your agent can make your website look designed instead of generated.</p>
             </section>
           </div>
         ) : null}
@@ -1495,7 +1515,7 @@ If you cannot access my domain provider or another service, tell me exactly wher
             </section>
 
             <section>
-              <p className="mb-3 text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">Step 1 of 3</p>
+              <p className="mb-3 text-xs font-medium tracking-[0.04em] text-muted-foreground">Step 1 of 3</p>
               <h2 className="mb-4 text-lg font-semibold tracking-tight">Separate your main domain and subdomain</h2>
               <p className="text-muted-foreground">Use your main domain for the website and a subdomain for the actual app. This keeps your public website and product separate.</p>
 
@@ -1518,7 +1538,7 @@ If you cannot access my domain provider or another service, tell me exactly wher
             </section>
 
             <section>
-              <p className="mb-3 text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">Step 2 of 3</p>
+              <p className="mb-3 text-xs font-medium tracking-[0.04em] text-muted-foreground">Step 2 of 3</p>
               <h2 className="mb-4 text-lg font-semibold tracking-tight">Separate your app emails and marketing emails</h2>
               <p className="text-muted-foreground">Do not send every email from the same domain. Keeping product and marketing emails separate helps protect important messages if marketing emails ever have deliverability or spam issues.</p>
 
@@ -1552,7 +1572,7 @@ If you cannot access my domain provider or another service, tell me exactly wher
             </section>
 
             <section>
-              <p className="mb-3 text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">Step 3 of 3</p>
+              <p className="mb-3 text-xs font-medium tracking-[0.04em] text-muted-foreground">Step 3 of 3</p>
               <h2 className="mb-4 text-lg font-semibold tracking-tight">Set up your sitemap and Google Search Console</h2>
               <p className="text-muted-foreground">Your sitemap helps Google discover the public pages on your website.</p>
 

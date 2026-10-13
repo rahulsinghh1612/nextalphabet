@@ -80,7 +80,7 @@ export const buildEpisodes: BuildEpisode[] = [
     number: 7,
     slug: "7",
     title: "Make Your Vibe-Coded Website Look Better",
-    description: "Four tools that give AI coding agents better design direction, components, review, and visual testing.",
+    description: "Give your coding agent a DESIGN.md file, Impeccable, and Chrome DevTools MCP before you redesign anything.",
     date: "Episode 7",
     published: true,
   },
