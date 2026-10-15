@@ -133,4 +133,12 @@ export const buildEpisodes: BuildEpisode[] = [
     date: "Scrapling",
     published: true,
   },
+  {
+    number: 14,
+    slug: "14",
+    title: "Reverse Engineer Any App With REA",
+    description: "Set up REA with Claude Code, Codex, or Cursor, then use it to learn how features work, recover lost code, and connect to tools without an API.",
+    date: "Episode 14",
+    published: true,
+  },
 ];
