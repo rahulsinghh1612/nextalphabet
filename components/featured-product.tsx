@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { ArrowUpRight, Check, Mic } from "lucide-react";
+import { ArrowUpRight, Check, Laptop, Mic, Smartphone } from "lucide-react";
 
 const APP_STORE = "https://apps.apple.com/app/id6762544241?pt=128800034&ct=nextalphabet";
 const MAC_APP_STORE = "https://apps.apple.com/app/id6762544241?platform=mac&pt=128800034&ct=nextalphabet";
@@ -90,7 +90,8 @@ function DictationDemo() {
         </motion.span>
       </div>
 
-      <div className="mt-3 flex items-center gap-3">
+      {/* Right-aligned like ToneScribe's own recording pill (Rahul, Oct 16): mic at the edge, then waveform, then status. */}
+      <div className="mt-3 flex flex-row-reverse items-center gap-3">
         <span className="relative grid h-8 w-8 place-items-center">
           {listening ? (
             <motion.span
@@ -124,7 +125,7 @@ function DictationDemo() {
             />
           ))}
         </div>
-        <span className="whitespace-nowrap text-xs text-muted-foreground">{listening ? "Listening…" : "Done"}</span>
+        <span className="whitespace-nowrap text-xs text-muted-foreground">{listening ? "Listening…" : "Transcribed"}</span>
       </div>
     </div>
   );
@@ -153,7 +154,10 @@ export function FeaturedProduct() {
         </div>
         <div>
           <h2 className="text-[16px] font-medium tracking-tight text-foreground">ToneScribe</h2>
-          <p className="text-xs text-muted-foreground">iPhone · Mac</p>
+          <p className="mt-1 flex items-center gap-1.5 text-muted-foreground" aria-label="For iPhone and Mac">
+            <Smartphone className="h-3.5 w-3.5" strokeWidth={2} />
+            <Laptop className="h-4 w-4" strokeWidth={2} />
+          </p>
         </div>
       </div>
 
@@ -163,29 +167,55 @@ export function FeaturedProduct() {
         <DictationDemo />
       </div>
 
-      {/* Simple and light (Rahul, Oct 16): "Also on Mac" gets the Mac app's grey highlight only on hover; "Download for iPhone" as on tonescribe.com. */}
-      <div className="mt-5 flex flex-wrap items-center justify-end gap-2.5">
-        <a
-          href={MAC_APP_STORE}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group inline-flex h-9 items-center gap-1 rounded-[10px] px-3.5 text-[13px] text-muted-foreground transition-colors hover:bg-[rgb(244,245,248)] hover:text-foreground"
-        >
-          Also on Mac
-          <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2} />
-        </a>
+      {/* Phones (Rahul, Oct 16, seen in Instagram's browser): one full-width Download, then "Also on Mac" and the
+          pricing on a single line. Wider screens keep both buttons on the right with the pricing under them. */}
+      <div className="mt-5 sm:hidden">
         <a
           href={APP_STORE}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex h-9 items-center gap-1.5 rounded-full bg-foreground px-4 text-[13px] font-medium text-background transition-opacity hover:opacity-85"
+          className="flex h-11 w-full items-center justify-center gap-1.5 rounded-full bg-foreground text-[14px] font-medium text-background transition-opacity hover:opacity-85"
         >
-          <AppleLogo className="h-3.5 w-3.5 -translate-y-px" />
+          <AppleLogo className="h-4 w-4 -translate-y-px" />
           Download for iPhone
         </a>
+        <div className="mt-2.5 flex items-center justify-between gap-2 text-[11px] text-muted-foreground min-[380px]:text-xs">
+          <a
+            href={MAC_APP_STORE}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="-ml-2 inline-flex items-center gap-1 whitespace-nowrap rounded-[8px] px-2 py-1.5 transition-colors hover:bg-[rgb(244,245,248)] hover:text-foreground"
+          >
+            Also on Mac
+            <ArrowUpRight className="h-3 w-3" strokeWidth={2} />
+          </a>
+          <span className="whitespace-nowrap">One purchase · No subscription</span>
+        </div>
       </div>
-      {/* The biggest selling point, worded as on tonescribe.com (Rahul, Oct 16). */}
-      <p className="mt-2.5 text-right text-xs text-muted-foreground">Free to try · One-time purchase · No subscription</p>
+
+      <div className="mt-5 hidden sm:block">
+        <div className="flex items-center justify-end gap-2.5">
+          <a
+            href={MAC_APP_STORE}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group inline-flex h-9 items-center gap-1 rounded-[10px] px-3.5 text-[13px] text-muted-foreground transition-colors hover:bg-[rgb(244,245,248)] hover:text-foreground"
+          >
+            Also on Mac
+            <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={2} />
+          </a>
+          <a
+            href={APP_STORE}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex h-9 items-center gap-1.5 rounded-full bg-foreground px-4 text-[13px] font-medium text-background transition-opacity hover:opacity-85"
+          >
+            <AppleLogo className="h-3.5 w-3.5 -translate-y-px" />
+            Download for iPhone
+          </a>
+        </div>
+        <p className="mt-2.5 text-right text-xs text-muted-foreground">Free to try · One-time purchase · No subscription</p>
+      </div>
     </motion.div>
   );
 }

@@ -70,10 +70,11 @@ export default function Home() {
         </Reveal>
 
         {/* Two-tone headline that arrives word by word, the same blur-in as the dictation demo (Rahul, Oct 16: more premium, same words). */}
-        <h1 className="mt-6 text-[32px] font-bold leading-[1.2] tracking-[-0.035em] sm:text-[38px]">
-          <HeadlineWords text={`Hey, I'm ${founder.name.split(" ")[0]}.`} className="text-foreground" start={0.1} />
-          <br />
-          <HeadlineWords text="I love building products." className="text-foreground/40" start={0.32} />
+        {/* Always exactly two lines at one size (Rahul, Oct 16): the size follows the screen width so the longer line,
+            "I love building products.", never wraps, even in Instagram's in-app browser on a small phone. */}
+        <h1 className="mt-6 text-[clamp(22px,7.4vw,38px)] font-bold leading-[1.2] tracking-[-0.035em]">
+          <HeadlineWords text={`Hey, I'm ${founder.name.split(" ")[0]}.`} className="block whitespace-nowrap text-foreground" start={0.1} />
+          <HeadlineWords text="I love building products." className="block whitespace-nowrap text-foreground/40" start={0.32} />
         </h1>
 
         <div className="mt-12">
@@ -110,7 +111,9 @@ export default function Home() {
               {siteConfig.email}
             </a>
             .
-            <br />
+          </p>
+          {/* Its own line with room above it (Rahul, Oct 16), so the two read as two separate things. */}
+          <p className="mt-4 text-[15px] leading-7 text-muted-foreground">
             Find me on{" "}
             <a href={siteConfig.instagram} target="_blank" rel="noopener noreferrer" className={linkClass}>
               Instagram
