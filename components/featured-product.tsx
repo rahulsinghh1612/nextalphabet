@@ -184,6 +184,8 @@ export function FeaturedProduct() {
           Download for iPhone
         </a>
       </div>
+      {/* The biggest selling point, worded as on tonescribe.com (Rahul, Oct 16). */}
+      <p className="mt-2.5 text-right text-xs text-muted-foreground">Free to try · One-time purchase · No subscription</p>
     </motion.div>
   );
 }
