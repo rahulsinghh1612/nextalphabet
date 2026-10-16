@@ -141,4 +141,12 @@ export const buildEpisodes: BuildEpisode[] = [
     date: "Episode 14",
     published: true,
   },
+  {
+    number: 15,
+    slug: "15",
+    title: "Lock Down Your Vibe-Coded App",
+    description: "Fix the three mistakes behind most vibe-coded app hacks, then let your coding agent check your app for all ten.",
+    date: "Episode 15",
+    published: true,
+  },
 ];
