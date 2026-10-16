@@ -5,7 +5,7 @@ export const siteConfig = {
   url: "https://www.nextalphabet.com",
   twitter: "https://x.com/nextalphabet_",
   /** Leave empty to hide the Instagram link in the footer. */
-  instagram: "",
+  instagram: "https://www.instagram.com/rahulsingghh_/",
   email: "rahul@nextalphabet.com",
 };
 
