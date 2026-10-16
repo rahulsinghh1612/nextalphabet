@@ -6,7 +6,7 @@ export const siteConfig = {
   twitter: "https://x.com/nextalphabet_",
   /** Leave empty to hide the Instagram link in the footer. */
   instagram: "",
-  email: "contact@nextalphabet.com",
+  email: "rahul@nextalphabet.com",
 };
 
 export const founder = {
