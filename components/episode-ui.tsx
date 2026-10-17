@@ -77,6 +77,12 @@ export const SECURE_STEPS = [
   { id: "fix", title: "Fix what it finds" },
 ];
 
+export const APP_REVIEW_STEPS = [
+  { id: "copy", title: "Copy the App Review prompt" },
+  { id: "paste", title: "Paste it into your agent" },
+  { id: "fix", title: "Fix what it finds" },
+];
+
 export const REA_STEPS = [
   { id: "copy", title: "Copy the setup prompt" },
   { id: "paste", title: "Paste it into your agent" },

@@ -149,4 +149,12 @@ export const buildEpisodes: BuildEpisode[] = [
     date: "Episode 15",
     published: true,
   },
+  {
+    number: 16,
+    slug: "16",
+    title: "20 Things to Fix Before You Submit to the App Store",
+    description: "Let your coding agent check your iOS app against 20 App Review rules, then fix what it finds before Apple does.",
+    date: "Episode 16",
+    published: true,
+  },
 ];
