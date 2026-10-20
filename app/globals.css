@@ -79,7 +79,11 @@ html.build-paper ::selection { background: #ffd93b; color: #141414; }
 }
 /* Hover on links and rows: a warm, darker paper tint (never white). */
 .build-paper .hl-hover { padding: 2px 6px; margin: -2px -6px; border-radius: 4px; transition: background-color 0.15s; }
-.build-paper .hl-hover:hover { background: #ffe36e; color: #141414; }
+/* Hover only on devices with a mouse, so a tap on a phone doesn't leave a link or row tinted; taps get a brief tint. */
+@media (hover: hover) {
+  .build-paper .hl-hover:hover { background: #ffe36e; color: #141414; }
+}
+.build-paper .hl-hover:active { background: #ffe36e; color: #141414; }
 .build-paper .prompt-card {
   background: #fff;
   border: 2px solid #141414;
@@ -87,4 +91,7 @@ html.build-paper ::selection { background: #ffd93b; color: #141414; }
   box-shadow: 5px 5px 0 #141414;
 }
 /* Rows use hover:bg-muted at 40–60%; on cream that barely shows, so hovered rows get the full "light paper" tint (Rahul, Oct 20). */
-.build-paper [class*="hover:bg-muted"]:hover { background-color: var(--color-muted); }
+@media (hover: hover) {
+  .build-paper [class*="hover:bg-muted"]:hover { background-color: var(--color-muted); }
+}
+.build-paper [class*="hover:bg-muted"]:active { background-color: var(--color-muted); }
