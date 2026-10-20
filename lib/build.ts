@@ -157,4 +157,12 @@ export const buildEpisodes: BuildEpisode[] = [
     date: "Episode 16",
     published: true,
   },
+  {
+    number: 17,
+    slug: "17",
+    title: "Find Your Next App Idea",
+    description: "Five places that show what people already pay for, and a prompt that turns what you find into an app idea you can build.",
+    date: "Episode 17",
+    published: true,
+  },
 ];
