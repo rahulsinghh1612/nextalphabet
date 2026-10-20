@@ -56,7 +56,7 @@ body {
 html.build-paper {
   --color-background: #f3efe6;
   --color-foreground: #141414;
-  --color-muted: #e3dac7;
+  --color-muted: #ebe5d8;
   --color-muted-foreground: #6f6a62;
   --color-border: #dcd4c6;
 }
@@ -86,5 +86,5 @@ html.build-paper ::selection { background: #ffd93b; color: #141414; }
   border-radius: 6px;
   box-shadow: 5px 5px 0 #141414;
 }
-/* Rows use hover:bg-muted at 40–60%; on cream that barely shows, so hovered rows get the full paper tint. */
+/* Rows use hover:bg-muted at 40–60%; on cream that barely shows, so hovered rows get the full "light paper" tint (Rahul, Oct 20). */
 .build-paper [class*="hover:bg-muted"]:hover { background-color: var(--color-muted); }
