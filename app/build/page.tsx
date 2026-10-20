@@ -18,12 +18,12 @@ export default async function BuildHome() {
   return (
     <main className="px-6">
       <div className="mx-auto max-w-5xl">
-        <div className="flex items-end justify-between gap-6 pt-8 sm:pt-10">
-          <div className="pb-2">
-            <h1 className="ep-title">Build</h1>
-            <div className="mt-4"><BuildIntro /></div>
+        <div className="flex items-end gap-4 pt-8 sm:gap-6 sm:pt-10">
+          <BuildCharacter pose="wave" className="w-[64px] shrink-0 sm:w-[84px]" />
+          <div className="min-w-0 pb-1">
+            <h1 className="ep-title"><span className="ep-mark">Build</span></h1>
+            <div className="mt-3"><BuildIntro /></div>
           </div>
-          <BuildCharacter pose="wave" className="-mb-2 w-[78px] shrink-0 sm:w-[104px]" />
         </div>
 
         <section className="pt-12 sm:pt-14">

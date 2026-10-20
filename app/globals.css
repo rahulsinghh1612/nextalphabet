@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
-@theme inline {
+/* Not inline: utilities read the variables at runtime, so the Build layout can retheme them (html.build-paper). */
+@theme {
   --color-background: #ffffff;
   --color-foreground: #0a0a0a;
   --color-muted: #fafafa;
@@ -55,7 +56,7 @@ body {
 html.build-paper {
   --color-background: #f3efe6;
   --color-foreground: #141414;
-  --color-muted: #ebe5d9;
+  --color-muted: #e3dac7;
   --color-muted-foreground: #6f6a62;
   --color-border: #dcd4c6;
 }
@@ -68,15 +69,22 @@ html.build-paper ::selection { background: #ffd93b; color: #141414; }
   font-size: clamp(2.1rem, 6vw, 2.8rem);
   line-height: 1.1;
 }
-.build-paper .ep-mark,
-.build-paper .hl-hover:hover {
-  background: linear-gradient(transparent 12%, #ffd93b 12%, #ffd93b 88%, transparent 88%);
+/* Title highlight (Oct 20, Rahul picked "marker"): a highlighter pass over the lower half of the words. */
+.build-paper .ep-mark {
+  background: linear-gradient(transparent 52%, #ffe36e 52%, #ffe36e 94%, transparent 94%);
+  padding: 0 0.08em;
+  margin: 0 -0.04em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
 }
-.build-paper .ep-mark { padding: 0 0.12em; margin: 0 -0.04em; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
-.build-paper .hl-hover { padding: 2px 6px; margin: -2px -6px; border-radius: 2px; }
+/* Hover on links and rows: a warm, darker paper tint (never white). */
+.build-paper .hl-hover { padding: 2px 6px; margin: -2px -6px; border-radius: 4px; transition: background-color 0.15s; }
+.build-paper .hl-hover:hover { background: #ffe36e; color: #141414; }
 .build-paper .prompt-card {
   background: #fff;
   border: 2px solid #141414;
   border-radius: 6px;
   box-shadow: 5px 5px 0 #141414;
 }
+/* Rows use hover:bg-muted at 40–60%; on cream that barely shows, so hovered rows get the full paper tint. */
+.build-paper [class*="hover:bg-muted"]:hover { background-color: var(--color-muted); }

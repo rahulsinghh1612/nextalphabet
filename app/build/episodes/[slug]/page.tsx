@@ -39,10 +39,12 @@ export default async function EpisodePage({ params }: { params: Promise<{ slug: 
               <>{episode.title.split(episode.mark)[0]}<span className="ep-mark">{episode.mark}</span>{episode.title.split(episode.mark)[1]}</>
             ) : episode.title}
           </h1>
-          <p className="mt-5 max-w-2xl leading-7 text-muted-foreground">{episode.description}</p>
+          <p className="mt-5 hidden max-w-2xl leading-7 text-muted-foreground sm:block">{episode.description}</p>
           </div>
           <BuildCharacter pose={poseFor(episode.number)} className="-mt-1 w-[64px] shrink-0 sm:-mr-4 sm:w-[104px]" />
         </header>
+        {/* On phones the character sits beside the title only; the description gets the full width. */}
+        <p className="-mt-4 pb-9 leading-7 text-muted-foreground sm:hidden">{episode.description}</p>
 
         {episode.instagramUrl ? (
           <a

@@ -97,7 +97,7 @@ export function ReaStep({ n, id, title, children }: { n: number; id: string; tit
         <span className="step-dot grid h-8 w-8 shrink-0 place-items-center rounded-full bg-foreground text-sm font-semibold text-background">{n}</span>
         <h2 className="text-lg font-semibold tracking-tight">{title}</h2>
       </div>
-      <div className="pl-12">{children}</div>
+      <div className="sm:pl-12">{children}</div>
     </section>
   );
 }
@@ -140,7 +140,7 @@ export function PromptBlock({ children }: { children: ReactNode }) {
   const text = typeof children === "string" ? children : String(children);
   return (
     <div className="relative">
-      <pre className="prompt-card overflow-x-auto whitespace-pre-wrap rounded-xl bg-muted p-4 pr-14 font-mono text-[13px] leading-6 text-foreground sm:p-5 sm:pr-16">
+      <pre className="prompt-card overflow-x-auto whitespace-pre-wrap rounded-xl bg-muted p-4 pr-20 font-mono text-[13px] leading-6 text-foreground sm:p-5 sm:pr-24">
         {children}
       </pre>
       <CopyPrompt text={text} />
