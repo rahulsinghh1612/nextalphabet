@@ -48,3 +48,35 @@ body {
 .cursor-blink {
   animation: blink 1s step-end infinite;
 }
+
+/* ---- Build site: paper look (Oct 20, look A) ----------------------------------------------- */
+/* Cream page, ink text, Newsreader titles with the reels' yellow highlighter, the prompt as a reel card.
+   Scoped to the Build layout (build.nextalphabet.com); the main site keeps its own look. */
+html.build-paper {
+  --color-background: #f3efe6;
+  --color-foreground: #141414;
+  --color-muted: #ebe5d9;
+  --color-muted-foreground: #6f6a62;
+  --color-border: #dcd4c6;
+}
+html.build-paper body { background: #f3efe6; }
+html.build-paper ::selection { background: #ffd93b; color: #141414; }
+.build-paper .ep-title {
+  font-family: var(--font-newsreader), Georgia, serif;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  font-size: clamp(2.1rem, 6vw, 2.8rem);
+  line-height: 1.1;
+}
+.build-paper .ep-mark,
+.build-paper .hl-hover:hover {
+  background: linear-gradient(transparent 12%, #ffd93b 12%, #ffd93b 88%, transparent 88%);
+}
+.build-paper .ep-mark { padding: 0 0.12em; margin: 0 -0.04em; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.build-paper .hl-hover { padding: 2px 6px; margin: -2px -6px; border-radius: 2px; }
+.build-paper .prompt-card {
+  background: #fff;
+  border: 2px solid #141414;
+  border-radius: 6px;
+  box-shadow: 5px 5px 0 #141414;
+}

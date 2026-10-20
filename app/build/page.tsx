@@ -5,6 +5,7 @@ import Link from "next/link";
 import { buildEpisodes } from "@/lib/build";
 import { products, type Product } from "@/lib/constants";
 import { BuildIntro } from "@/components/build-intro";
+import { BuildCharacter } from "@/components/build-character";
 
 async function buildBasePath() {
   const host = (await headers()).get("host") ?? "";
@@ -17,16 +18,20 @@ export default async function BuildHome() {
   return (
     <main className="px-6">
       <div className="mx-auto max-w-5xl">
-        <div className="pt-8 sm:pt-10">
-          <BuildIntro />
+        <div className="flex items-end justify-between gap-6 pt-8 sm:pt-10">
+          <div className="pb-2">
+            <h1 className="ep-title">Build</h1>
+            <div className="mt-4"><BuildIntro /></div>
+          </div>
+          <BuildCharacter pose="wave" className="-mb-2 w-[78px] shrink-0 sm:w-[104px]" />
         </div>
 
         <section className="pt-12 sm:pt-14">
           <div className="mb-6">
-            <h1 className="flex items-center gap-2.5 text-[15px] font-semibold">
+            <h2 className="flex items-center gap-2.5 text-[15px] font-semibold">
               <Clapperboard className="h-[18px] w-[18px]" strokeWidth={1.8} />
               Episodes
-            </h1>
+            </h2>
           </div>
           {buildEpisodes.map((episode) => (
             <Link

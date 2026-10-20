@@ -1,11 +1,16 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Newsreader } from "next/font/google";
 import { founder } from "@/lib/constants";
 import "../globals.css";
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+});
+
+const newsreader = Newsreader({
+  subsets: ["latin"],
+  variable: "--font-newsreader",
 });
 
 export const metadata: Metadata = {
@@ -21,8 +26,8 @@ export default function BuildLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={inter.variable}>
-      <body className="bg-white font-sans text-foreground antialiased">
+    <html lang="en" className={`build-paper ${inter.variable} ${newsreader.variable}`}>
+      <body className="font-sans text-foreground antialiased">
         {children}
         <footer className="px-6 py-8">
           <div className="mx-auto flex max-w-5xl flex-col gap-2 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
