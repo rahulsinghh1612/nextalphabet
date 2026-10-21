@@ -184,4 +184,13 @@ export const buildEpisodes: BuildEpisode[] = [
     date: "Episode 17",
     published: true,
   },
+  {
+    number: 18,
+    slug: "18",
+    title: "Don’t Start Vibe Coding Until These 4 Are In",
+    mark: "These 4",
+    description: "Four free Claude Code skills that clone, design, write and get your app found, and a prompt that installs all of them.",
+    date: "Episode 18",
+    published: true,
+  },
 ];
