@@ -69,11 +69,12 @@ html.build-paper ::selection { background: #ffd93b; color: #141414; }
   font-size: clamp(2.1rem, 6vw, 2.8rem);
   line-height: 1.1;
 }
-/* Title highlight (Oct 20, Rahul picked "marker"): a highlighter pass over the lower half of the words. */
+/* Title highlight (Oct 22, Rahul picked "soft full highlight", like the reels): a full yellow block behind the words. */
 .build-paper .ep-mark {
-  background: linear-gradient(transparent 52%, #ffe36e 52%, #ffe36e 94%, transparent 94%);
-  padding: 0 0.08em;
-  margin: 0 -0.04em;
+  background: #ffe36e;
+  border-radius: 0.14em;
+  padding: 0 0.12em;
+  margin: 0 -0.02em;
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
 }

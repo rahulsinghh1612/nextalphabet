@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ChevronLeft, ChevronRight, Clapperboard, Instagram } from "lucide-react";
+import { ChevronLeft, Clapperboard } from "lucide-react";
 import { headers } from "next/headers";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
@@ -46,41 +46,16 @@ export default async function EpisodePage({ params }: { params: Promise<{ slug: 
         {/* On phones the character sits beside the title only; the description gets the full width. */}
         <p className="-mt-4 pb-9 leading-7 text-muted-foreground sm:hidden">{episode.description}</p>
 
-        {episode.instagramUrl ? (
-          <a
-            href={episode.instagramUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group mb-10 flex items-center justify-between gap-4 rounded-xl border border-border p-4 transition-colors hover:bg-muted/50"
-          >
-            <div className="flex items-center gap-3">
-              <Instagram className="h-5 w-5 shrink-0 text-foreground" strokeWidth={1.8} />
-              <p className="flex items-baseline gap-2 whitespace-nowrap text-sm">
-                <span className="font-medium text-foreground">Watch this episode</span>
-                <span className="text-xs text-muted-foreground">Instagram Reel</span>
-              </p>
-            </div>
-            <ChevronRight className="h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-foreground" />
-          </a>
-        ) : null}
-
         {Content ? <Content /> : null}
 
         <nav className="mt-14 flex items-center justify-between">
           <Link href={homeHref} className="hl-hover inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground">
             <ChevronLeft className="h-4 w-4" /> Back to episodes
           </Link>
-          {episode.instagramUrl ? (
-            <a href={episode.instagramUrl} target="_blank" rel="noopener noreferrer" className="hl-hover flex items-center gap-2 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground">
-              <Clapperboard className="h-4 w-4 text-foreground" strokeWidth={1.8} />
-              <span>{episode.label ?? `Ep. ${String(episode.number).padStart(2, "0")}`}</span>
-            </a>
-          ) : (
-            <Link href={homeHref} className="hl-hover flex items-center gap-2 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground">
-              <Clapperboard className="h-4 w-4 text-foreground" strokeWidth={1.8} />
-              <span>{episode.label ?? `Ep. ${String(episode.number).padStart(2, "0")}`}</span>
-            </Link>
-          )}
+          <Link href={homeHref} className="hl-hover flex items-center gap-2 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground">
+            <Clapperboard className="h-4 w-4 text-foreground" strokeWidth={1.8} />
+            <span>{episode.label ?? `Ep. ${String(episode.number).padStart(2, "0")}`}</span>
+          </Link>
         </nav>
         <div className="mt-8">
           <BuildIntro />
