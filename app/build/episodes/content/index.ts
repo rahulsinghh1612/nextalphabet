@@ -18,6 +18,7 @@ import Episode15 from "./15";
 import Episode16 from "./16";
 import Episode17 from "./17";
 import Episode18 from "./18";
+import Episode19 from "./19";
 
 export const episodeContent: Record<number, ComponentType> = {
   0: Episode0,
@@ -39,4 +40,5 @@ export const episodeContent: Record<number, ComponentType> = {
   16: Episode16,
   17: Episode17,
   18: Episode18,
+  19: Episode19,
 };

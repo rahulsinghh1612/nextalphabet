@@ -193,4 +193,13 @@ export const buildEpisodes: BuildEpisode[] = [
     date: "Episode 18",
     published: true,
   },
+  {
+    number: 19,
+    slug: "19",
+    title: "5 places to launch your app",
+    mark: "launch",
+    description: "Five places to post your app the day it launches, why each one works, and a prompt that writes the post for each.",
+    date: "Episode 19",
+    published: true,
+  },
 ];
