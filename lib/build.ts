@@ -202,4 +202,13 @@ export const buildEpisodes: BuildEpisode[] = [
     date: "Episode 19",
     published: true,
   },
+  {
+    number: 20,
+    slug: "20",
+    title: "How Cursor was built",
+    mark: "Cursor",
+    description: "How four MIT students built a $60B code editor on someone else's AI, every number with its source, and a prompt to check how exposed your own app is.",
+    date: "Episode 20",
+    published: true,
+  },
 ];
