@@ -211,4 +211,13 @@ export const buildEpisodes: BuildEpisode[] = [
     date: "Episode 20",
     published: true,
   },
+  {
+    number: 21,
+    slug: "21",
+    title: "How to get paid for your app",
+    mark: "paid",
+    description: "App Store and Google Play for mobile, Stripe for web apps, and Polar or Dodo Payments where Stripe isn't open, with a prompt that sets it up.",
+    date: "Episode 21",
+    published: true,
+  },
 ];
