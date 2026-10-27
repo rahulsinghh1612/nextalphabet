@@ -225,7 +225,7 @@ export const buildEpisodes: BuildEpisode[] = [
     slug: "22",
     title: "Protect your app from hackers",
     mark: "hackers",
-    description: "Four things to do today: a spending limit on your API keys, usage alerts, cancelling leaked keys, and two-factor login, with a prompt that finds leaked keys.",
+    description: "Four things to do today, and a prompt that finds leaked keys.",
     date: "Episode 22",
     published: true,
   },
