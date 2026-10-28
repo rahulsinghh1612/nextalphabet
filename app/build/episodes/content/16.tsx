@@ -1,5 +1,4 @@
 import { ChevronRight } from "lucide-react";
-import { AppReviewChecklist } from "@/components/app-review-checklist";
 import { APP_REVIEW_STEPS, EpisodeResourceLink, PromptBlock, ReaStep } from "@/components/episode-ui";
 
 export default function Episode16() {
@@ -62,10 +61,9 @@ When you're done, give me a short pass/fail list of all 20. Then fix the failure
       </ReaStep>
 
       <ReaStep n={3} id="fix" title="Fix what it finds">
-        <p className="text-muted-foreground">It gives you a pass or fail for each check, then fixes the failures one at a time. Tick them off below as you go.</p>
+        <p className="text-muted-foreground">It gives you a pass or fail for each check, then fixes the failures one at a time.</p>
       </ReaStep>
 
-      <AppReviewChecklist />
 
       <section className="border-t border-border pt-8">
         <p className="text-sm leading-6 text-muted-foreground">

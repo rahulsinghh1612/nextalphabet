@@ -1,5 +1,4 @@
 import { ChevronRight } from "lucide-react";
-import { SecurityChecklist } from "@/components/security-checklist";
 import { BigOne, SECURE_STEPS, ReaStep, EpisodeResourceLink, InlineCode, PromptBlock } from "@/components/episode-ui";
 
 export default function Episode15() {
@@ -46,7 +45,7 @@ When you're done, give me a short pass/fail list of all ten. Then fix the failur
       </ReaStep>
 
       <ReaStep n={3} id="fix" title="Fix what it finds">
-        <p className="text-muted-foreground">It gives you a pass or fail for each check, then fixes the failures one at a time. Tick them off below as you go.</p>
+        <p className="text-muted-foreground">It gives you a pass or fail for each check, then fixes the failures one at a time.</p>
       </ReaStep>
 
       <section>
@@ -65,7 +64,6 @@ When you're done, give me a short pass/fail list of all ten. Then fix the failur
         </div>
       </section>
 
-      <SecurityChecklist />
 
       <section className="border-t border-border pt-8">
         <p className="text-sm leading-6 text-muted-foreground">Run the prompt again before every big launch, and any time you add a new feature that touches user data or paid APIs.</p>

@@ -1,5 +1,4 @@
 import { ChevronRight } from "lucide-react";
-import { SecureChecklist } from "@/components/secure-checklist";
 import { EpisodeResourceLink, PromptBlock, ReaStep } from "@/components/episode-ui";
 
 const STEPS = [
@@ -136,8 +135,6 @@ Don't change anything in the app except moving secrets into environment variable
           ))}
         </div>
       </section>
-
-      <SecureChecklist />
 
       <section className="border-t border-border pt-8">
         <p className="text-sm leading-6 text-muted-foreground">Settings move around. If one isn&apos;t where it says, check the provider&apos;s own page.</p>

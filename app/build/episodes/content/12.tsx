@@ -1,4 +1,3 @@
-import { DomainSetupChecklist } from "@/components/domain-setup-checklist";
 import { EpisodeResourceLink, DomainExample, InlineCode, SetupWarning, PromptBlock } from "@/components/episode-ui";
 
 export default function Episode12() {
@@ -144,7 +143,6 @@ If you cannot access my domain provider or another service, tell me exactly wher
         </div>
       </section>
 
-      <DomainSetupChecklist />
 
       <section className="border-t border-border pt-8">
         <p className="text-sm leading-6 text-muted-foreground">Once these are set up, your website, app, email, and Google indexing are all separated properly from the start.</p>

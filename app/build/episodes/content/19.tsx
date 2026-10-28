@@ -1,5 +1,4 @@
 import { ChevronRight } from "lucide-react";
-import { LaunchChecklist } from "@/components/launch-checklist";
 import { EpisodeResourceLink, PromptBlock, ReaStep } from "@/components/episode-ui";
 
 const STEPS = [
@@ -99,7 +98,6 @@ Check each place's current rules before you write, and follow them. Write like a
         </div>
       </ReaStep>
 
-      <LaunchChecklist />
 
       <section className="border-t border-border pt-8">
         <p className="text-sm leading-6 text-muted-foreground">Each place has its own rules for self-promotion. Read them before you post, and stick around to answer every comment.</p>

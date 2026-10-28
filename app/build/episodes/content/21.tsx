@@ -1,5 +1,4 @@
 import { ChevronRight } from "lucide-react";
-import { PaidChecklist } from "@/components/paid-checklist";
 import { EpisodeResourceLink, PromptBlock, ReaStep } from "@/components/episode-ui";
 
 const STEPS = [
@@ -93,7 +92,6 @@ Don't change anything else in the app. Ask me if something is unclear.`}</Prompt
         </div>
       </ReaStep>
 
-      <PaidChecklist />
 
       <section className="border-t border-border pt-8">
         <p className="text-sm leading-6 text-muted-foreground">Don&apos;t overcomplicate it. Pick one and start charging. Fees and country rules change, so check each provider&apos;s own page before you sign up.</p>

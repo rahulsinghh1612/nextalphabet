@@ -1,4 +1,3 @@
-import { DesignSetupChecklist } from "@/components/design-setup-checklist";
 import { EpisodeResourceLink, InlineCode, SetupWarning, PromptBlock } from "@/components/episode-ui";
 
 export default function Episode7() {
@@ -142,7 +141,6 @@ Fix what's broken, then check again.`}</PromptBlock>
         </div>
       </section>
 
-      <DesignSetupChecklist />
 
       <section>
         <h2 className="mb-4 text-lg font-semibold tracking-tight">Two more worth adding</h2>
