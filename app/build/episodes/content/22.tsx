@@ -9,30 +9,72 @@ const STEPS = [
   { id: "two-factor", title: "Turn on two-factor login" },
 ];
 
+const RESOURCES = [
+  {
+    group: "Spending limits and alerts",
+    links: [
+      { href: "https://help.openai.com/en/articles/9186755-managing-projects-in-the-api-platform", title: "Project limits and alerts", context: "OpenAI · help" },
+      { href: "https://platform.claude.com/docs/en/manage-claude/workspaces", title: "Workspace spend limits", context: "Anthropic · docs" },
+    ],
+  },
+  {
+    group: "Leaked keys",
+    links: [
+      { href: "https://thehackernews.com/2026/10/leaked-litellm-master-key-let-attackers.html", title: "The LiteLLM key that still worked", context: "The Hacker News" },
+      { href: "https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository", title: "Removing sensitive data from a repository", context: "GitHub · docs" },
+    ],
+  },
+  {
+    group: "Two-factor login",
+    links: [
+      { href: "https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa", title: "Two-factor authentication", context: "GitHub · docs" },
+      { href: "https://support.stripe.com/questions/enable-two-step-verification", title: "Two-step verification", context: "Stripe Support" },
+    ],
+  },
+];
+
 export default function Episode22() {
   return (
     <div className="space-y-12 text-[15px] leading-7">
       <section>
         <h2 className="mb-3 text-lg font-semibold tracking-tight">Start here: copy this prompt</h2>
-        <p className="mb-5 text-muted-foreground">Paste it into Claude Code or Codex. It finds leaked keys in your code and git history.</p>
-        <PromptBlock>{`Check my project for leaked API keys and secrets.
+        <p className="mb-5 text-muted-foreground">Paste it into Claude Code or Codex. It walks you through all four steps: it fixes what it can in your code and tells you exactly where to click for the rest.</p>
+        <PromptBlock>{`Help me protect my app from hackers. Go through these four steps one at a time. After each step, tell me what you found or changed, and wait for me to say "done" before the next one.
 
+First, look at my code and list which services I use: AI providers (OpenAI, Anthropic or others), payments (Stripe or others), and where the app is hosted (Railway, Vercel, Render or others). Use that list in every step.
+
+Step 1: Spending limits
+For each AI provider I use, give me the exact place to set a monthly spending limit, and suggest an amount from what my app really uses.
+- OpenAI: project Limits page. Tell me to turn on "Enforce a hard limit", or the budget only watches and doesn't stop requests.
+- Anthropic: Console, Workspaces, Spend limits.
+
+Step 2: Usage alerts
+For each AI provider, tell me where to add an email alert at 50 to 80% of the limit.
+
+Step 3: Leaked keys
 1. Find any keys, tokens or passwords written in the code (e.g. "sk-", "sk-ant-", "sk_live_").
 2. Search the whole git history too. Removed keys stay in old commits.
 3. Make sure .env files are in .gitignore and were never committed.
 4. Move every secret into environment variables. Only show me the first few characters of each.
-5. List every key that was ever exposed, so I can revoke it in the provider's dashboard and make a new one.
+5. List every key that was ever exposed. For each one, tell me to revoke it on the provider's API keys page, make a new one, update it on my host and redeploy. Deleting it from the code is not enough.
+
+Step 4: Two-factor login
+For my host, GitHub and my payments provider, tell me where to turn on two-factor login. Tell me to use an authenticator app or passkey instead of text messages, and to save the backup codes.
+
+At the end, give me a short checklist of what's done and what's left.
 
 Docs:
-- https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository
-- https://help.openai.com/en/articles/9186755-managing-projects-in-the-api-platform
-- https://platform.claude.com/docs/en/manage-claude/workspaces
+- OpenAI limits and alerts: https://help.openai.com/en/articles/9186755-managing-projects-in-the-api-platform
+- Anthropic spend limits: https://platform.claude.com/docs/en/manage-claude/workspaces
+- Removing keys from git history: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository
+- GitHub two-factor: https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa
+- Stripe two-step verification: https://support.stripe.com/questions/enable-two-step-verification
 
-Don't change anything else.`}</PromptBlock>
+Don't change anything in the app except moving secrets into environment variables.`}</PromptBlock>
       </section>
 
       <section>
-        <h2 className="mb-3 text-lg font-semibold tracking-tight">The four steps</h2>
+        <h2 className="mb-3 text-lg font-semibold tracking-tight">Or do it by hand</h2>
         <ol className="space-y-1">
           {STEPS.map((step, i) => (
             <li key={step.id}>
@@ -52,10 +94,6 @@ Don't change anything else.`}</PromptBlock>
           <li><span className="font-medium text-foreground">OpenAI:</span> project Limits, set a budget, turn on <span className="font-medium text-foreground">Enforce a hard limit</span>. Without it, nothing stops.</li>
           <li><span className="font-medium text-foreground">Anthropic:</span> Console, Workspaces, Spend limits.</li>
         </ul>
-        <div className="mt-5 space-y-3">
-          <EpisodeResourceLink href="https://help.openai.com/en/articles/9186755-managing-projects-in-the-api-platform" title="Project limits" context="OpenAI · help" />
-          <EpisodeResourceLink href="https://platform.claude.com/docs/en/manage-claude/workspaces" title="Workspace spend limits" context="Anthropic · docs" />
-        </div>
       </ReaStep>
 
       <ReaStep n={2} id="alerts" title="Turn on usage alerts">
@@ -74,10 +112,6 @@ Don't change anything else.`}</PromptBlock>
           <li>Update it on your host and redeploy.</li>
           <li>Check usage for requests you didn&apos;t make.</li>
         </ol>
-        <div className="mt-5 space-y-3">
-          <EpisodeResourceLink href="https://thehackernews.com/2026/10/leaked-litellm-master-key-let-attackers.html" title="The LiteLLM key that still worked" context="The Hacker News" />
-          <EpisodeResourceLink href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository" title="Removing sensitive data from a repository" context="GitHub · docs" />
-        </div>
       </ReaStep>
 
       <ReaStep n={4} id="two-factor" title="Turn on two-factor login">
@@ -87,11 +121,21 @@ Don't change anything else.`}</PromptBlock>
           <li><span className="font-medium text-foreground">GitHub:</span> Settings, Password and authentication.</li>
           <li><span className="font-medium text-foreground">Stripe:</span> Dashboard, Personal details.</li>
         </ul>
-        <div className="mt-5 space-y-3">
-          <EpisodeResourceLink href="https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa" title="Two-factor authentication" context="GitHub · docs" />
-          <EpisodeResourceLink href="https://support.stripe.com/questions/enable-two-step-verification" title="Two-step verification" context="Stripe Support" />
-        </div>
       </ReaStep>
+
+      <section>
+        <h2 className="mb-5 text-lg font-semibold tracking-tight">Resources</h2>
+        <div className="space-y-6">
+          {RESOURCES.map((r) => (
+            <div key={r.group}>
+              <h3 className="mb-1 text-sm font-semibold text-muted-foreground">{r.group}</h3>
+              <div className="space-y-1">
+                {r.links.map((l) => <EpisodeResourceLink key={l.href} href={l.href} title={l.title} context={l.context} />)}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
 
       <SecureChecklist />
 

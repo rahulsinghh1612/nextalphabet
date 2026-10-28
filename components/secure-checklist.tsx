@@ -7,7 +7,7 @@ const items = [
   "Monthly spending limit set on every AI provider I use",
   "OpenAI: \"Enforce a hard limit\" is on",
   "A usage alert emails me well before the limit",
-  "No keys in my code or git history (the prompt above checks)",
+  "No keys in my code or git history",
   "Every key that was ever exposed is revoked and replaced",
   "Two-factor login on my hosting",
   "Two-factor login on GitHub",
