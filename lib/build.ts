@@ -238,4 +238,13 @@ export const buildEpisodes: BuildEpisode[] = [
     date: "Episode 23",
     published: true,
   },
+  {
+    number: 24,
+    slug: "24",
+    title: "Edit your reels with Claude, for free",
+    mark: "free",
+    description: "My full setup: the five prompts I use to edit my reels with Claude Code.",
+    date: "Episode 24",
+    published: true,
+  },
 ];
