@@ -247,4 +247,13 @@ export const buildEpisodes: BuildEpisode[] = [
     date: "Episode 24",
     published: true,
   },
+  {
+    number: 25,
+    slug: "25",
+    title: "Rebuild any app you want with this free tool",
+    mark: "free tool",
+    description: "Set up Craft Anything and rebuild your first website with Claude Code.",
+    date: "Episode 25",
+    published: true,
+  },
 ];
